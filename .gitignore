@@ -1,0 +1,17 @@
+tmp
+doc
+pkg
+vendor
+!lib/rspec/rails/vendor
+*.gem
+Gemfile.lock
+bin
+.rvmrc
+*.rbc
+.yardoc
+.bundle
+.rails-version
+.DS_Store
+Gemfile-custom
+.rbenv-version
+.rbx
