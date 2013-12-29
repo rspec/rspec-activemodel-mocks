@@ -31,13 +31,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency(%q<activemodel>, [">= 3.0"])
   s.add_runtime_dependency(%q<actionpack>, [">= 3.0"])
   s.add_runtime_dependency(%q<railties>, [">= 3.0"])
-  %w[core expectations mocks rails].each do |name|
-    if RSpec::Rails::ModelMocks::Version::STRING =~ /[a-zA-Z]+/ # prerelease builds
-      s.add_runtime_dependency "rspec-#{name}", "= #{RSpec::Rails::ModelMocks::Version::STRING}"
-    else
-      s.add_runtime_dependency "rspec-#{name}", "~> #{RSpec::Rails::ModelMocks::Version::STRING.split('.')[0..1].concat(['0']).join('.')}"
-    end
-  end
+  s.add_runtime_dependency("rspec-rails", ">= 3.0.0.beta1")
   s.add_runtime_dependency "rspec-collection_matchers"
 
   s.add_development_dependency 'rake',     '~> 10.0.0'
