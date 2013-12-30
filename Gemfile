@@ -15,6 +15,13 @@ gem 'rspec-rails', :git => "git://github.com/thomas-holmes/rspec-rails", :branch
 
 gem 'sqlite3'
 
+### deps for rdoc.info
+group :documentation do
+  gem 'yard',          '0.8.7.3', :require => false
+  gem 'redcarpet',     '2.3.0'
+  gem 'github-markup', '1.0.0'
+end
+
 custom_gemfile = File.expand_path("../Gemfile-custom", __FILE__)
 eval File.read(custom_gemfile) if File.exist?(custom_gemfile)
 
