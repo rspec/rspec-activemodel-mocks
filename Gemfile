@@ -22,9 +22,6 @@ group :documentation do
   gem 'github-markup', '1.0.0'
 end
 
-custom_gemfile = File.expand_path("../Gemfile-custom", __FILE__)
-eval File.read(custom_gemfile) if File.exist?(custom_gemfile)
-
 version_file = File.expand_path("../.rails-version", __FILE__)
 case version = ENV['RAILS_VERSION'] || (File.exist?(version_file) && File.read(version_file).chomp)
 when /master/
