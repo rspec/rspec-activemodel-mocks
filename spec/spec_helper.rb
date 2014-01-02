@@ -1,15 +1,6 @@
 require 'rspec/collection_matchers'
-require 'rails/all'
-
-module RSpecRails
-  class Application < ::Rails::Application
-    self.config.secret_key_base = 'ASecretString' if config.respond_to? :secret_key_base
-  end
-end
-
-#require 'rspec/rails'
 require 'rspec/rails/model_mocks'
-require 'ammeter/init'
+require 'active_record'
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
@@ -31,5 +22,6 @@ RSpec.configure do |config|
   config.after(:each) do
     RSpec.instance_variable_set(:@world, real_world)
   end
+
   config.order = :random
 end
