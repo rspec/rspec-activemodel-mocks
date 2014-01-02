@@ -27,16 +27,13 @@ Gem::Specification.new do |s|
     s.cert_chain = [File.expand_path('~/.gem/rspec-gem-public_cert.pem')]
   end
 
-  s.add_runtime_dependency(%q<activesupport>, [">= 3.0"])
-  s.add_runtime_dependency(%q<activemodel>, [">= 3.0"])
-  s.add_runtime_dependency(%q<actionpack>, [">= 3.0"])
-  s.add_runtime_dependency(%q<railties>, [">= 3.0"])
-  s.add_runtime_dependency("rspec-rails", ">= 3.0.0.beta1")
+  s.add_runtime_dependency(%q<activesupport>, [">= 4.0"])
+  s.add_runtime_dependency(%q<activemodel>, [">= 4.0"])
+  s.add_runtime_dependency(%q<activerecord>, [">= 4.0"])
   s.add_runtime_dependency "rspec-collection_matchers"
 
   s.add_development_dependency 'rake',     '~> 10.0.0'
   s.add_development_dependency 'cucumber', '~> 1.3.5'
   s.add_development_dependency 'aruba',    '~> 0.4.11'
   s.add_development_dependency 'ZenTest',  '~> 4.9.5'
-  s.add_development_dependency 'ammeter',  '0.2.5'
 end
