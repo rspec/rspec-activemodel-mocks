@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors     = ["David Chelimsky", "Andy Lindeman"]
   s.email       = "rspec@googlegroups.com"
   s.homepage    = "http://github.com/thomas-holmes/rspec-activemodel-mocks"
-  s.summary     = "rspec-activerecord-mocks-#{RSpec::ActiveModel::Mocks::Version::STRING}"
+  s.summary     = "rspec-activemodel-mocks-#{RSpec::ActiveModel::Mocks::Version::STRING}"
   s.description = "Mocking and Stubbing ActiveModels"
 
   s.rubyforge_project = "rspec"
