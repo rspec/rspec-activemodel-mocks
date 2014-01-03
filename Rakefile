@@ -85,11 +85,6 @@ namespace :db do
   end
 end
 
-desc "run a variety of specs against the generated app"
-task :smoke do
-  in_sample "LOCATION='../../templates/run_specs.rb' bin/rake"
-end
-
 desc 'clobber generated files'
 task :clobber do
   rm_rf "pkg"
@@ -118,7 +113,7 @@ task :relish, :version do |t, args|
   sh "rm features/Changelog.md"
 end
 
-task :default => [:spec, "clobber:app", "generate:sample", :smoke, :cucumber]
+task :default => [:spec, "clobber:app", "generate:sample", :cucumber]
 
 task :verify_private_key_present do
   private_key = File.expand_path('~/.gem/rspec-gem-private_key.pem')
