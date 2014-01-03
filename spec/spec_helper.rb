@@ -1,4 +1,3 @@
-require 'rspec/collection_matchers'
 require 'rspec/active_model/mocks'
 require 'active_record'
 
