@@ -1,8 +1,9 @@
+$:<< File.join(File.dirname(__FILE__), '..')
 require 'active_record'
 require 'yaml'
 require 'rspec/rails/model_mocks'
 
-require_relative '../models/widget'
+require 'models/widget'
 
 db_config = YAML::load(File.open('db/config.yml'))
 
