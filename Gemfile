@@ -21,16 +21,10 @@ group :documentation do
 end
 
 case version = ENV['RAILS_VERSION']
-when /master/
-  gem "activerecord", :git => "git://github.com/rails/activerecord.git"
-  gem "activerecord-deprecated_finders", :git => "git://github.com/rails/activerecord-deprecated_finders.git"
-  gem "activesupport", :git => "git://github.com/rails/activesupport.git"
 when nil, false, ""
   gem "activerecord", "4.0.2"
   gem "activesupport", "4.0.2"
-  #gem "activerecord-deprecated_finders"
 else
   gem "activerecord", version
   gem "activesupport", version
-  #gem "activerecord-deprecated_finders"
 end
