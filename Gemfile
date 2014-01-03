@@ -23,8 +23,10 @@ end
 case version = ENV['RAILS_VERSION']
 when nil, false, ""
   gem "activerecord", "4.0.2"
+  gem "activemodel", "4.0.2"
   gem "activesupport", "4.0.2"
 else
   gem "activerecord", version
+  gem "activemodel", version
   gem "activesupport", version
 end

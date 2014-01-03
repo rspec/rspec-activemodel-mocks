@@ -1,7 +1,7 @@
 require 'active_support/core_ext'
 require 'active_model'
 
-module RSpec::Rails::ModelMocks
+module RSpec::ActiveModel::Mocks
   class IllegalDataAccessException < StandardError; end
   module Mocks
 
@@ -195,7 +195,7 @@ EOM
       # Raises an IllegalDataAccessException (stubbed models are not allowed to access the database)
       # @raises IllegalDataAccessException
       def connection
-        raise RSpec::Rails::ModelMocks::IllegalDataAccessException.new("stubbed models are not allowed to access the database")
+        raise RSpec::ActiveModel::Mocks::IllegalDataAccessException.new("stubbed models are not allowed to access the database")
       end
     end
 
@@ -263,4 +263,4 @@ EOM
   end
 end
 
-RSpec.configuration.include RSpec::Rails::ModelMocks::Mocks
+RSpec.configuration.include RSpec::ActiveModel::Mocks::Mocks

@@ -1,6 +1,6 @@
-# RSpec::Rails::ModelMocks [![Build Status](https://secure.travis-ci.org/thomas-holmes/rspec-rails-model_mocks.png?branch=master)](http://travis-ci.org/thomas-holmes/rspec-rails-model_mocks)
+# RSpec::ActiveModel::Mocks [![Build Status](https://secure.travis-ci.org/thomas-holmes/rspec-activemodel-mocks.png?branch=master)](http://travis-ci.org/thomas-holmes/rspec-activemodel-mocks)
 
-RSpec::Rails::ModelMocks provides tools for testing `ActiveRecord` models.
+RSpec::ActiveModel::Mocks provides tools for testing `ActiveModel` classes.
 
     mock_model(Person, name: "Fred")
 
@@ -8,7 +8,7 @@ RSpec::Rails::ModelMocks provides tools for testing `ActiveRecord` models.
 
 Add this line to your application's gemfile:
 
-    gem 'rspec-rails-model_mocks', git: 'https://github.com/thomas-holmes/rspec-rails-model_mocks'
+    gem 'rspec-activemodel-mocks', git: 'https://github.com/thomas-holmes/rspec-activemodel-mocks'
 
 And then execute:
 
@@ -20,6 +20,11 @@ you will need to follow [`rspec-rails`](https://github.com/rspec/rspec-rails) in
 and run:
 
     rails generate rspec:install
+
+This gem can also be used in a standalone project using only `ActiveModel` by requiring
+the following:
+
+    require 'rspec/active_model/mocks'
 
 ## Usage
 

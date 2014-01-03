@@ -89,7 +89,7 @@ describe "stub_model" do
     it "raises when hitting the db" do
       expect do
         stub_model(MockableModel).connection
-      end.to raise_error(RSpec::Rails::ModelMocks::IllegalDataAccessException, /stubbed models are not allowed to access the database/)
+      end.to raise_error(RSpec::ActiveModel::Mocks::IllegalDataAccessException, /stubbed models are not allowed to access the database/)
     end
 
     it "increments the id" do

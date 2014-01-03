@@ -1,17 +1,17 @@
 # -*- encoding: utf-8 -*-
 $LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
-require "rspec/rails/model_mocks/version"
+require 'rspec/active_model/mocks/version'
 
 Gem::Specification.new do |s|
-  s.name        = "rspec-rails-model_mocks"
-  s.version     = RSpec::Rails::ModelMocks::Version::STRING
+  s.name        = "rspec-activemodel-mocks"
+  s.version     = RSpec::ActiveModel::Mocks::Version::STRING
   s.platform    = Gem::Platform::RUBY
   s.license     = "MIT"
   s.authors     = ["David Chelimsky", "Andy Lindeman"]
   s.email       = "rspec@googlegroups.com"
-  s.homepage    = "http://github.com/thomas-holmes/rspec-rails-model_mocks"
-  s.summary     = "rspec-rails-model_mocks-#{RSpec::Rails::ModelMocks::Version::STRING}"
-  s.description = "Mocking and Stubbing ActiveModels for RSpec-Rails"
+  s.homepage    = "http://github.com/thomas-holmes/rspec-activemodel-mocks"
+  s.summary     = "rspec-activerecord-mocks-#{RSpec::ActiveModel::Mocks::Version::STRING}"
+  s.description = "Mocking and Stubbing ActiveModels"
 
   s.rubyforge_project = "rspec"
 
@@ -29,11 +29,11 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency(%q<activesupport>, [">= 3.0"])
   s.add_runtime_dependency(%q<activemodel>,   [">= 3.0"])
-  s.add_runtime_dependency(%q<activerecord>,  [">= 3.0"])
   s.add_runtime_dependency "rspec-collection_matchers"
 
   s.add_development_dependency 'rake',     '~> 10.0.0'
   s.add_development_dependency 'cucumber', '~> 1.3.5'
   s.add_development_dependency 'aruba',    '~> 0.4.11'
   s.add_development_dependency 'ZenTest',  '~> 4.9.5'
+  s.add_development_dependency(%q<activerecord>,  [">= 3.0"])
 end

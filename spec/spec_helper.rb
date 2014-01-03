@@ -1,5 +1,5 @@
 require 'rspec/collection_matchers'
-require 'rspec/rails/model_mocks'
+require 'rspec/active_model/mocks'
 require 'active_record'
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}

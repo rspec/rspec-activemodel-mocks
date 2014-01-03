@@ -381,7 +381,7 @@ describe "mock_model(RealModel)" do
     end
   end
 
-  # MinitestAssertionAdapter is not present in model_mocks
+  # MinitestAssertionAdapter is not present in rspec-activemodel-mocks
   # describe "ActiveModel Lint tests" do
   #   require 'active_model/lint'
   #   include RSpec::Rails::MinitestAssertionAdapter

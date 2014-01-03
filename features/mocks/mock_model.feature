@@ -133,7 +133,7 @@ Feature: mock_model
   Scenario: mock_model outside rails
     Given a file named "mock_model_outside_rails_spec.rb" with:
       """ruby
-      require 'rspec/rails/model_mocks'
+      require 'rspec/active_model/mocks'
 
       describe "Foo" do
         it "is mockable" do

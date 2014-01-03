@@ -1,6 +1,6 @@
 module RSpec
-  module Rails
-    module ModelMocks
+  module ActiveModel
+    module Mocks
       module Version
         STRING = '0.0.1'
       end

@@ -1,7 +1,7 @@
 $:<< File.join(File.dirname(__FILE__), '..')
 require 'active_record'
 require 'yaml'
-require 'rspec/rails/model_mocks'
+require 'rspec/active_model/mocks'
 
 require 'models/widget'
 
