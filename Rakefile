@@ -50,7 +50,7 @@ namespace :generate do
     unless File.directory?('./tmp/sample')
       bindir = File.expand_path("bin")
 
-      Dir.mkdir('tmp') unless Dir.exists?('tmp')
+      Dir.mkdir('tmp') unless File.directory?('tmp')
       sh "cp -r ./templates/sample ./tmp/sample"
 
       if test ?d, bindir
