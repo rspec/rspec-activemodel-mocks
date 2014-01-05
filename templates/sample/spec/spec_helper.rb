@@ -3,7 +3,7 @@ require 'active_record'
 require 'rspec/active_model/mocks'
 require 'model/widget'
 
-ActiveRecord::Base.establish_connection adapter: "sqlite3", database: ":memory:"
+ActiveRecord::Base.establish_connection :adapter => "sqlite3", :database => ":memory:"
 
 load 'db/schema.rb'
 
