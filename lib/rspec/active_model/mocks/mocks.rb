@@ -114,7 +114,8 @@ EOM
                :blank? => false}.merge(stubs)
 
       double("#{model_class.name}_#{stubs[:id]}", stubs).tap do |m|
-        m.singleton_class.class_eval do
+        msingleton = class << m; self; end
+        msingleton.class_eval do
           include ActiveModelInstanceMethods
           include ActiveRecordInstanceMethods if defined?(ActiveRecord)
           include ActiveModel::Conversion
@@ -128,7 +129,6 @@ EOM
           end
         end
 
-        msingleton = m.singleton_class
         msingleton.__send__(:define_method, :is_a?) do |other|
           model_class.ancestors.include?(other)
         end unless stubs.has_key?(:is_a?)
