@@ -69,7 +69,7 @@ module RSpec::ActiveModel::Mocks
     # stubbed (via add_stubs) if `stubs` is passed. This is most useful for
     # impersonating models that don't exist yet.
     #
-    # NOTE that only ActiveModel's methods, plus <tt>new_record?</tt>, are
+    # ActiveModel methods, plus <tt>new_record?</tt>, are
     # stubbed out implicitly.  <tt>new_record?</tt> returns the inverse of
     # <tt>persisted?</tt>, and is present only for compatibility with
     # extension frameworks that have yet to update themselves to the
@@ -201,7 +201,7 @@ EOM
 
     # Creates an instance of `Model` with `to_param` stubbed using a
     # generated value that is unique to each object. If `Model` is an
-    # `ActiveRecord` model, it is prohibited from accessing the database*.
+    # `ActiveRecord` model, it is prohibited from accessing the database.
     #
     # For each key in `stubs`, if the model has a matching attribute
     # (determined by `respond_to?`) it is simply assigned the submitted values.
