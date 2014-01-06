@@ -1,4 +1,4 @@
-require 'active_support/core_ext'
+require 'active_support/core_ext/object/to_param'
 require 'active_model'
 
 module RSpec::ActiveModel::Mocks
@@ -106,12 +106,12 @@ It received #{model_class.inspect}
 EOM
       end
 
-      stubs = stubs.reverse_merge(:id => next_id)
-      stubs = stubs.reverse_merge(:persisted? => !!stubs[:id],
-                                  :destroyed? => false,
-                                  :marked_for_destruction? => false,
-                                  :valid? => true,
-                                  :blank? => false)
+      stubs = {:id => next_id}.merge(stubs)
+      stubs = {:persisted? => !!stubs[:id],
+               :destroyed? => false,
+               :marked_for_destruction? => false,
+               :valid? => true,
+               :blank? => false}.merge(stubs)
 
       double("#{model_class.name}_#{stubs[:id]}", stubs).tap do |m|
         m.singleton_class.class_eval do
@@ -232,13 +232,13 @@ EOM
         if defined?(ActiveRecord) && model_class < ActiveRecord::Base
           m.extend ActiveRecordStubExtensions
           primary_key = model_class.primary_key.to_sym
-          stubs = stubs.reverse_merge(primary_key => next_id)
-          stubs = stubs.reverse_merge(:persisted? => !!stubs[primary_key])
+          stubs = {primary_key => next_id}.merge(stubs)
+          stubs = {:persisted? => !!stubs[primary_key]}.merge(stubs)
         else
-          stubs = stubs.reverse_merge(:id => next_id)
-          stubs = stubs.reverse_merge(:persisted? => !!stubs[:id])
+          stubs = {:id => next_id}.merge(stubs)
+          stubs = {:persisted? => !!stubs[:id]}.merge(stubs)
         end
-        stubs = stubs.reverse_merge(:blank? => false)
+        stubs = {:blank? => false}.merge(stubs)
 
         stubs.each do |message, return_value|
           if m.respond_to?("#{message}=")
