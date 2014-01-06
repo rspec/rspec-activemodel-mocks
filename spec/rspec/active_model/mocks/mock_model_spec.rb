@@ -385,6 +385,7 @@ describe "mock_model(RealModel)" do
     begin
       require 'minitest/assertions'
       include Minitest::Assertions
+      include MinitestAssertion
     rescue LoadError
       require 'test/unit/assertions'
       include Test::Unit::Assertions
