@@ -381,21 +381,27 @@ describe "mock_model(RealModel)" do
     end
   end
 
-  # MinitestAssertionAdapter is not present in rspec-activemodel-mocks
-  # describe "ActiveModel Lint tests" do
-  #   require 'active_model/lint'
-  #   include RSpec::Rails::MinitestAssertionAdapter
-  #   include ActiveModel::Lint::Tests
+  describe "ActiveModel Lint tests" do
+    begin
+      require 'minitest/assertions'
+      include Minitest::Assertions
+    rescue LoadError
+      require 'test/unit/assertions'
+      include Test::Unit::Assertions
+    end
 
-  #   # to_s is to support ruby-1.9
-  #   ActiveModel::Lint::Tests.public_instance_methods.map{|m| m.to_s}.grep(/^test/).each do |m|
-  #     example m.gsub('_',' ') do
-  #       send m
-  #     end
-  #   end
+    require 'active_model/lint'
+    include ActiveModel::Lint::Tests
 
-  #   def model
-  #     mock_model(MockableModel, :id => nil)
-  #   end
-  # end
+    # to_s is to support ruby-1.9
+    ActiveModel::Lint::Tests.public_instance_methods.map{|m| m.to_s}.grep(/^test/).each do |m|
+      example m.gsub('_',' ') do
+        send m
+      end
+    end
+
+    def model
+      mock_model(MockableModel, :id => nil)
+    end
+  end
 end
