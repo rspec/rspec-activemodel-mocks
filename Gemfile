@@ -20,11 +20,11 @@ group :documentation do
   gem 'github-markup', '1.0.0'
 end
 
-case version = ENV['RAILS_VERSION']
-when nil, false, ""
-  gem "activerecord", "4.0.2"
-  gem "activemodel", "4.0.2"
-  gem "activesupport", "4.0.2"
+case version = ENV.fetch('RAILS_VERSION', '4.0.2')
+when /\Amaster\z/, /stable\z/
+  gem "activerecord", :github => "rails/rails", :branch => version
+  gem "activemodel", :github => "rails/rails", :branch => version
+  gem "activesupport", :github => "rails/rails", :branch => version
 else
   gem "activerecord", version
   gem "activemodel", version
