@@ -229,12 +229,12 @@ describe "mock_model(RealModel)" do
           expect(model.column_a).to eq("a")
         end
         it "does not stub column accessor if already stubbed after declaration (with string)" do
-          allow(@model).to receive_messages("column_a" => "a")
+          allow(@model).to receive(:column_a) { "a" }
           @model.respond_to?("column_a")
           expect(@model.column_a).to eq("a")
         end
         it "does not stub column accessor if already stubbed after declaration (with symbol)" do
-          allow(@model).to receive_messages(:column_a => "a")
+          allow(@model).to receive(:column_a) { "a" }
           @model.respond_to?("column_a")
           expect(@model.column_a).to eq("a")
         end
