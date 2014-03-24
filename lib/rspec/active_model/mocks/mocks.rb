@@ -146,6 +146,10 @@ EOM
           model_class.respond_to?(:column_names) && model_class.column_names.include?(method_name.to_s)
         end
 
+        msingleton.__send__(:define_method, :has_attribute?) do |attr_name|
+          __model_class_has_column?(attr_name)
+        end unless stubs.has_key?(:has_attribute?)
+
         msingleton.__send__(:define_method, :respond_to?) do |method_name, *args|
         include_private = args.first || false
           __model_class_has_column?(method_name) ? true : super(method_name, include_private)
