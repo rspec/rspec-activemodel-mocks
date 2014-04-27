@@ -88,7 +88,7 @@ module RSpec::ActiveModel::Mocks
           model_class = Object.const_get(string_or_model_class)
         else
           model_class = Object.const_set(string_or_model_class, Class.new do
-            extend ActiveModel::Naming
+            extend ::ActiveModel::Naming
             def self.primary_key; :id; end
           end)
         end
@@ -96,7 +96,7 @@ module RSpec::ActiveModel::Mocks
         model_class = string_or_model_class
       end
 
-      unless model_class.kind_of? ActiveModel::Naming
+      unless model_class.kind_of? ::ActiveModel::Naming
         raise ArgumentError.new <<-EOM
 The mock_model method can only accept as its first argument:
 * A String representing a Class that does not exist

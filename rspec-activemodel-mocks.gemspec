@@ -22,13 +22,14 @@ Gem::Specification.new do |s|
   s.require_path      = "lib"
 
   private_key = File.expand_path('~/.gem/rspec-gem-private_key.pem')
-  if File.exist?(private_key)
+  if File.exists?(private_key)
     s.signing_key = private_key
     s.cert_chain = [File.expand_path('~/.gem/rspec-gem-public_cert.pem')]
   end
 
   s.add_runtime_dependency(%q<activesupport>, [">= 3.0"])
   s.add_runtime_dependency(%q<activemodel>,   [">= 3.0"])
+  s.add_runtime_dependency(%q<rspec-mocks>,   [">= 2.99.0.beta2"])
 
   s.add_development_dependency 'rake',     '~> 10.0.0'
   s.add_development_dependency 'cucumber', '~> 1.3.5'
