@@ -238,7 +238,7 @@ EOM
     def stub_model(model_class, stubs={})
       model_class.new.tap do |m|
         m.extend ActiveModelStubExtensions
-        if defined?(ActiveRecord) && model_class < ActiveRecord::Base
+        if defined?(ActiveRecord) && model_class < ActiveRecord::Base && model_class.primary_key
           m.extend ActiveRecordStubExtensions
           primary_key = model_class.primary_key.to_sym
           stubs = {primary_key => next_id}.merge(stubs)
