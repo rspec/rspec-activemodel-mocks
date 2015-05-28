@@ -13,8 +13,6 @@ Gem::Specification.new do |s|
   s.summary     = "rspec-activemodel-mocks-#{RSpec::ActiveModel::Mocks::Version::STRING}"
   s.description = "RSpec test doubles for ActiveModel and ActiveRecord"
 
-  s.rubyforge_project = "rspec"
-
   s.files             = `git ls-files -- lib/*`.split("\n")
   s.files            += %w[README.md License.txt .yardopts]
   s.test_files        = `git ls-files -- {spec,features}/*`.split("\n")
