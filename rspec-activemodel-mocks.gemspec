@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
   s.authors     = ["David Chelimsky", "Andy Lindeman", "Thomas Holmes"]
   s.email       = "rspec@googlegroups.com"
-  s.homepage    = "http://github.com/thomas-holmes/rspec-activemodel-mocks"
+  s.homepage    = "https://github.com/rspec/rspec-activemodel-mocks"
   s.summary     = "rspec-activemodel-mocks-#{RSpec::ActiveModel::Mocks::Version::STRING}"
   s.description = "RSpec test doubles for ActiveModel and ActiveRecord"
 
