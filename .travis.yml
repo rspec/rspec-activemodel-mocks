@@ -7,8 +7,8 @@ before_install:
 rvm:
   - 1.9.3
   - 2.0.0
-  - 2.1.0
-  - 2.2.2
+  - 2.1.7
+  - 2.2.3
 env:
   - RAILS_VERSION=master
   - RAILS_VERSION=4-2-stable
@@ -18,12 +18,12 @@ env:
   - RAILS_VERSION=3-1-stable
 matrix:
   exclude:
-    # Rails 3.x - 4.0 do not support ruby 2.2.2:
-    - rvm: 2.2.2
-      env: RAILS_VERSION=3.1-stable
-    - rvm: 2.2.2
-      env: RAILS_VERSION=3.2-stable
-    - rvm: 2.2.2
-      env: RAILS_VERSION=4.0-stable
+    # Rails 3.x - 4.0 do not support ruby 2.2.x
+    - rvm: 2.2.3
+      env: RAILS_VERSION=3-1-stable
+    - rvm: 2.2.3
+      env: RAILS_VERSION=3-2-stable
+    - rvm: 2.2.3
+      env: RAILS_VERSION=4-0-stable
   allow_failures:
     - env: RAILS_VERSION=master
