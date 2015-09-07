@@ -1,7 +1,7 @@
 script: "bin/rake --trace 2>&1"
 bundler_args: "--binstubs --without documentation"
 before_install:
-  - gem update --system 2.1.11
+  - gem update --system
   - gem --version
   - gem install bundler
 rvm:
@@ -55,3 +55,8 @@ matrix:
       env: RAILS_VERSION=4.0.2
   allow_failures:
     - env: RAILS_VERSION=master
+
+branches:
+  only:
+    - master
+    - /^\d+-\d+-maintenance$/
