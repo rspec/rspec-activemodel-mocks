@@ -424,7 +424,7 @@ describe "mock_model(RealModel)" do
           gem 'minitest' if defined?(Kernel.gem)
           require 'minitest/unit'
           include MiniTest::Assertions
-        elsif version >= '3.2.22'
+        elsif version >= '3.2.22' || version == '3-2-stable'
           begin
             # Test::Unit "helpfully" sets up autoload for its `AutoRunner`.
             # While we do not reference it directly, when we load the `TestCase`
