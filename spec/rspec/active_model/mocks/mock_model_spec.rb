@@ -423,7 +423,7 @@ describe "mock_model(RealModel)" do
           # This gem has no `lib/minitest.rb` file.
           gem 'minitest' if defined?(Kernel.gem)
           require 'minitest/unit'
-          Assertions = MiniTest::Assertions
+          include MiniTest::Assertions
         elsif version >= '3.2.22'
           begin
             # Test::Unit "helpfully" sets up autoload for its `AutoRunner`.
@@ -443,7 +443,7 @@ describe "mock_model(RealModel)" do
               Gemfile: `gem 'test-unit', '~> 3.0'` (#{e.message})"
             ERR
           end
-          Assertions = Test::Unit::Assertions
+          include Test::Unit::Assertions
         else
           raise LoadError, <<-ERR.squeeze
             Ruby 2.2+ doesn't support this version of Rails #{version}
