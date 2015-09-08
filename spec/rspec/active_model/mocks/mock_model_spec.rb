@@ -444,6 +444,11 @@ describe "mock_model(RealModel)" do
             ERR
           end
           include Test::Unit::Assertions
+          if defined?(Test::Unit::AutoRunner.need_auto_run = ())
+            Test::Unit::AutoRunner.need_auto_run = false
+          elsif defined?(Test::Unit.run = ())
+            Test::Unit.run = false
+          end
         else
           raise LoadError, <<-ERR.squeeze
             Ruby 2.2+ doesn't support this version of Rails #{version}
@@ -452,6 +457,11 @@ describe "mock_model(RealModel)" do
       else
         require 'test/unit/assertions'
         include Test::Unit::Assertions
+        if defined?(Test::Unit::AutoRunner.need_auto_run = ())
+          Test::Unit::AutoRunner.need_auto_run = false
+        elsif defined?(Test::Unit.run = ())
+          Test::Unit.run = false
+        end
       end
     end
 
