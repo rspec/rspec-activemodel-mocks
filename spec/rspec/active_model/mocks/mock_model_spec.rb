@@ -414,8 +414,55 @@ describe "mock_model(RealModel)" do
       include Minitest::Assertions
       include MinitestAssertion
     rescue LoadError
-      require 'test/unit/assertions'
-      include Test::Unit::Assertions
+      if RUBY_VERSION >= '2.2.0'
+        # Minitest / TestUnit has been removed from ruby core. However, we are
+        # on an old Rails version and must load the appropriate gem
+        version = ENV.fetch('RAILS_VERSION', '4.2.4')
+        if version >= '4.0.0'
+          # ActiveSupport 4.0.x has the minitest '~> 4.2' gem as a dependency
+          # This gem has no `lib/minitest.rb` file.
+          gem 'minitest' if defined?(Kernel.gem)
+          require 'minitest/unit'
+          include MiniTest::Assertions
+        elsif version >= '3.2.22' || version == '3-2-stable'
+          begin
+            # Test::Unit "helpfully" sets up autoload for its `AutoRunner`.
+            # While we do not reference it directly, when we load the `TestCase`
+            # classes from AS (ActiveSupport), AS kindly references `AutoRunner`
+            # for everyone.
+            #
+            # To handle this we need to pre-emptively load 'test/unit' and make
+            # sure the version installed has `AutoRunner` (the 3.x line does to
+            # date). If so, we turn the auto runner off.
+            require 'test/unit'
+            require 'test/unit/assertions'
+          rescue LoadError => e
+            raise LoadError, <<-ERR.squeeze, e.backtrace
+              Ruby 2.2+ has removed test/unit from the core library. Rails
+              requires this as a dependency. Please add test-unit gem to your
+              Gemfile: `gem 'test-unit', '~> 3.0'` (#{e.message})"
+            ERR
+          end
+          include Test::Unit::Assertions
+          if defined?(Test::Unit::AutoRunner.need_auto_run = ())
+            Test::Unit::AutoRunner.need_auto_run = false
+          elsif defined?(Test::Unit.run = ())
+            Test::Unit.run = false
+          end
+        else
+          raise LoadError, <<-ERR.squeeze
+            Ruby 2.2+ doesn't support this version of Rails #{version}
+          ERR
+        end
+      else
+        require 'test/unit/assertions'
+        include Test::Unit::Assertions
+        if defined?(Test::Unit::AutoRunner.need_auto_run = ())
+          Test::Unit::AutoRunner.need_auto_run = false
+        elsif defined?(Test::Unit.run = ())
+          Test::Unit.run = false
+        end
+      end
     end
 
     require 'active_model/lint'

@@ -20,7 +20,7 @@ group :documentation do
   gem 'github-markup', '1.0.0'
 end
 
-case version = ENV.fetch('RAILS_VERSION', '4.0.2')
+case version = ENV.fetch('RAILS_VERSION', '4.2.4')
 when /\Amaster\z/, /stable\z/
   gem "activerecord", :github => "rails/rails", :branch => version
   gem "activemodel", :github => "rails/rails", :branch => version
@@ -30,5 +30,7 @@ else
   gem "activemodel", version
   gem "activesupport", version
 end
+
+gem "test-unit", '~> 3' if (version >= '3.2.22' || version == '3-2-stable') && version < '4.0.0'
 
 gem "i18n", '< 0.7.0' if RUBY_VERSION < '1.9.3'
