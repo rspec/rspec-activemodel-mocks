@@ -298,6 +298,13 @@ describe "mock_model(RealModel)" do
       end
 
       context "with as_null_object" do
+        around do |example|
+          original = RSpec::Mocks.configuration.syntax
+          RSpec::Mocks.configuration.syntax = :should
+          example.run
+          RSpec::Mocks.configuration.syntax = original
+        end
+
         it "says it will not respond_to?(xxx_before_type_cast)" do
           model = NonActiveRecordModel.new.as_null_object
           expect(model.respond_to?("title_before_type_cast")).to be(false)
