@@ -151,4 +151,16 @@ describe "stub_model" do
     end
 
   end
+
+  context "with an ActiveRecord model with no primary key" do
+    let(:model_class) { MockableModelNoPrimaryKey }
+
+    it "yields the model" do
+      model = stub_model(model_class) do |block_arg|
+        @block_arg = block_arg
+      end
+      expect(model).to be(@block_arg)
+    end
+
+  end
 end
