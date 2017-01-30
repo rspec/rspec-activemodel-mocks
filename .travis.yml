@@ -12,7 +12,7 @@ rvm:
   - 2.0
   - 2.1
   - 2.2
-  - 2.3
+  - 2.3.3
 env:
   - RAILS_VERSION=master
   - RAILS_VERSION=4-2-stable
