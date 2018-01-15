@@ -144,11 +144,9 @@ EOM
           include ActiveModel::Validations
         end
         if defined?(ActiveRecord)
-          [:save, :update_attributes, :update].each do |key|
-            if stubs[key] == false
-              RSpec::Mocks.allow_message(m.errors, :empty?).and_return(false)
-              RSpec::Mocks.allow_message(m.errors, :blank?).and_return(false)
-            end
+          if stubs.values_at(:save, :update_attributes, :update).include?(false)
+            RSpec::Mocks.allow_message(m.errors, :empty?).and_return(false)
+            RSpec::Mocks.allow_message(m.errors, :blank?).and_return(false)
           end
         end
 
