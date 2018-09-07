@@ -38,6 +38,11 @@ module RSpec::ActiveModel::Mocks
       def initialize(association_name)
         @association_name = association_name
       end
+
+      def inversed_from(record)
+        self.target = record
+        @inversed = !!record
+      end
     end
 
     module ActiveRecordInstanceMethods
