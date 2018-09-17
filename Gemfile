@@ -31,6 +31,10 @@ else
   gem "activesupport", version
 end
 
-gem "test-unit", '~> 3' if (version >= '3.2.22' || version == '3-2-stable') && version < '4.0.0'
+if version < '4.0.0'
+  gem "test-unit", '~> 3' if (version >= '3.2.22' || version == '3-2-stable')
+else
+  gem "minitest", :require => false
+end
 
 gem "i18n", '< 0.7.0' if RUBY_VERSION < '1.9.3'
