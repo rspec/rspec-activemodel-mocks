@@ -13,6 +13,13 @@ Gem::Specification.new do |s|
   s.summary     = "rspec-activemodel-mocks-#{RSpec::ActiveModel::Mocks::Version::STRING}"
   s.description = "RSpec test doubles for ActiveModel and ActiveRecord"
 
+  s.metadata = {
+    'bug_tracker_uri'   => 'https://github.com/rspec/rspec-activemodel-mocks/issues',
+    'documentation_uri' => 'https://rspec.info/documentation/',
+    'mailing_list_uri'  => 'https://groups.google.com/forum/#!forum/rspec',
+    'source_code_uri'   => 'https://github.com/rspec/rspec-activemodel-mocks',
+  }
+
   s.files             = `git ls-files -- lib/*`.split("\n")
   s.files            += %w[README.md License.txt .yardopts]
   s.test_files        = `git ls-files -- {spec,features}/*`.split("\n")
