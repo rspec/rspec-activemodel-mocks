@@ -15,7 +15,7 @@ gem 'sqlite3'
 
 ### deps for rdoc.info
 group :documentation do
-  gem 'yard',          '0.8.7.3', :require => false
+  gem 'yard',          '~> 0.9', :require => false
   gem 'redcarpet',     '2.3.0'
   gem 'github-markup', '1.0.0'
 end
