@@ -2,9 +2,8 @@ script: "bin/rake --trace 2>&1"
 sudo: false
 bundler_args: "--binstubs --without documentation"
 before_install:
-  - gem update --system
+  - script/update_rubygems_and_install_bundler
   - gem --version
-  - gem install bundler
 matrix:
   include:
     # Rails dev / 6 builds >= 2.4.4
