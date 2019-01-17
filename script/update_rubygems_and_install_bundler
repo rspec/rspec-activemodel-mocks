@@ -5,15 +5,19 @@ This file was generated on 2019-01-03T20:34:23+00:00 from the rspec-dev repo.
 
 set -e
 
-function is_ruby_23_plus {
+function is_ruby_23_plus_and_not_rails_5 {
   if ruby -e "exit(RUBY_VERSION.to_f >= 2.3)"; then
-    return 0
+    if ruby -e "exit(ENV['RAILS_VERSION'].to_f < 5)"; then
+      return 1
+    else
+      return 0
+    fi
   else
     return 1
   fi
 }
 
-if is_ruby_23_plus; then
+if is_ruby_23_plus_and_not_rails_5; then
   gem update --system
   gem install bundler
 else
