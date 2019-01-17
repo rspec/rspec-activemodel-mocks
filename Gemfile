@@ -37,4 +37,12 @@ else
   gem "minitest", :require => false
 end
 
+if RUBY_VERSION < '2.0.0' && !!(RbConfig::CONFIG['host_os'] =~ /cygwin|mswin|mingw|bccwin|wince|emx/)
+  gem 'ffi', '< 1.9.15' # allow ffi to be installed on older rubies on windows
+elsif RUBY_VERSION < '1.9'
+  gem 'ffi', '< 1.9.19' # ffi dropped Ruby 1.8 support in 1.9.19
+else
+  gem 'ffi', '~> 1.9.25'
+end
+
 gem "i18n", '< 0.7.0' if RUBY_VERSION < '1.9.3'
