@@ -1,5 +1,4 @@
 script: "bin/rake --trace 2>&1"
-sudo: false
 bundler_args: "--binstubs --without documentation"
 before_install:
   - script/update_rubygems_and_install_bundler
