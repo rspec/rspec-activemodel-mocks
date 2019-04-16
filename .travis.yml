@@ -5,10 +5,8 @@ before_install:
   - gem --version
 matrix:
   include:
-    # Rails dev / 6 builds >= 2.4.5
+    # Rails dev / 6 builds >= 2.5.0
     - rvm: 2.5.3
-      env: RAILS_VERSION=master
-    - rvm: 2.4.5
       env: RAILS_VERSION=master
 
     # Rails 5.2 builds >= 2.2.2
