@@ -11,7 +11,6 @@ gemspec
   end
 end
 
-gem 'sqlite3'
 
 ### deps for rdoc.info
 group :documentation do
@@ -25,10 +24,18 @@ when /\Amaster\z/, /stable\z/
   gem "activerecord", :github => "rails/rails", :branch => version
   gem "activemodel", :github => "rails/rails", :branch => version
   gem "activesupport", :github => "rails/rails", :branch => version
+  if version.start_with?('4')
+    gem 'sqlite3', '~> 1.3.6'
+  elsif version.start_with?('3')
+    gem 'sqlite3', '~> 1.3.5'
+  else
+    gem 'sqlite3'
+  end
 else
   gem "activerecord", version
   gem "activemodel", version
   gem "activesupport", version
+  gem 'sqlite3', '~> 1.3.6'
 end
 
 if version < '4.0.0'

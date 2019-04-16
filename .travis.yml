@@ -1,21 +1,20 @@
 script: "bin/rake --trace 2>&1"
-sudo: false
 bundler_args: "--binstubs --without documentation"
 before_install:
   - script/update_rubygems_and_install_bundler
   - gem --version
 matrix:
   include:
-    # Rails dev / 6 builds >= 2.4.5
-    - rvm: 2.5.3
+    # Rails dev / 6 builds >= 2.5.0
+    - rvm: 2.6.2
       env: RAILS_VERSION=master
-    - rvm: 2.4.5
+    - rvm: 2.5.5
       env: RAILS_VERSION=master
 
     # Rails 5.2 builds >= 2.2.2
-    - rvm: 2.5.3
+    - rvm: 2.5.5
       env: RAILS_VERSION='~> 5.2.0'
-    - rvm: 2.4.5
+    - rvm: 2.4.6
       env: RAILS_VERSION='~> 5.2.0'
     - rvm: 2.3.8
       env: RAILS_VERSION='~> 5.2.0'
@@ -23,9 +22,9 @@ matrix:
       env: RAILS_VERSION='~> 5.2.0'
 
     # Rails 5.1 Builds >= 2.2.2
-    - rvm: 2.5.3
+    - rvm: 2.5.5
       env: RAILS_VERSION='~> 5.1.0'
-    - rvm: 2.4.5
+    - rvm: 2.4.6
       env: RAILS_VERSION='~> 5.1.0'
     - rvm: 2.3.8
       env: RAILS_VERSION='~> 5.1.0'
@@ -33,9 +32,9 @@ matrix:
       env: RAILS_VERSION='~> 5.1.0'
 
     # Rails 5.0 Builds >= 2.2.2
-    - rvm: 2.5.3
+    - rvm: 2.5.5
       env: RAILS_VERSION='~> 5.0.0'
-    - rvm: 2.4.5
+    - rvm: 2.4.6
       env: RAILS_VERSION='~> 5.0.0'
     - rvm: 2.3.8
       env: RAILS_VERSION='~> 5.0.0'
@@ -43,9 +42,9 @@ matrix:
       env: RAILS_VERSION='~> 5.0.0'
 
     # Rails 4.2 Builds >= 1.9.3
-    - rvm: 2.4.5
+    - rvm: 2.4.6
       env: RAILS_VERSION='~> 4.2.0'
-    - rvm: 2.4.5
+    - rvm: 2.4.6
       env: RAILS_VERSION=4-2-stable
     - rvm: 2.3.8
       env: RAILS_VERSION='~> 4.2.0'
