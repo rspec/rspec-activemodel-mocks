@@ -24,7 +24,7 @@ when /\Amaster\z/, /stable\z/
   gem "activerecord", :github => "rails/rails", :branch => version
   gem "activemodel", :github => "rails/rails", :branch => version
   gem "activesupport", :github => "rails/rails", :branch => version
-  if version.start_with?('4-') || version.start_with?('~> 4')
+  if version.start_with?('4-') || version.start_with?('~> 4') || version.start_with?('4')
     gem 'sqlite3', '~> 1.3.6'
   else
     gem 'sqlite3'
