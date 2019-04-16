@@ -39,6 +39,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake',     '~> 10.0.0'
   s.add_development_dependency 'cucumber', '~> 1.3'
   s.add_development_dependency 'aruba',    '~> 0.4.11'
-  s.add_development_dependency 'ZenTest',  '~> 4.9.5'
+  s.add_development_dependency 'ZenTest',  '~> 4.11.1'
   s.add_development_dependency(%q<activerecord>,  [">= 3.0"])
 end
