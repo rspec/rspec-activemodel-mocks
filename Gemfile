@@ -38,8 +38,6 @@ else
   gem 'sqlite3', '~> 1.3.6'
 end
 
-
-
 if version < '4.0.0'
   gem "test-unit", '~> 3' if (version >= '3.2.22' || version == '3-2-stable')
 else
