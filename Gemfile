@@ -41,7 +41,12 @@ end
 if version < '4.0.0'
   gem "test-unit", '~> 3' if (version >= '3.2.22' || version == '3-2-stable')
 else
-  gem "minitest", :require => false
+  # Version 5.12 of minitest requires Ruby 2.4
+  if RUBY_VERSION < '2.4.0'
+    gem 'minitest', '< 5.12.0'
+  else
+    gem 'minitest', '>= 5.12.0', :require => false
+  end
 end
 
 if RUBY_VERSION < '2.0.0' && !!(RbConfig::CONFIG['host_os'] =~ /cygwin|mswin|mingw|bccwin|wince|emx/)
