@@ -36,7 +36,16 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency(%q<activemodel>,   [">= 3.0"])
   s.add_runtime_dependency(%q<rspec-mocks>,   [">= 2.99", "< 4.0"])
 
-  s.add_development_dependency 'rake',     '~> 10.0.0'
+  if RUBY_VERSION.to_f < 1.9 || RUBY_VERSION == '1.9.2'
+    s.add_development_dependency "rake",     "~> 10.0.0"
+  elsif RUBY_VERSION.to_f < 2
+    s.add_development_dependency "rake",     "~> 11.0.0"
+  elsif RUBY_VERSION.to_f < 2.3
+    s.add_development_dependency "rake",     "~> 12.3.2"
+  else
+    s.add_development_dependency "rake",     "~> 13.0.0"
+  end
+
   s.add_development_dependency 'cucumber', '~> 1.3'
   s.add_development_dependency 'aruba',    '~> 0.4.11'
   s.add_development_dependency 'ZenTest',  '~> 4.11.2'
