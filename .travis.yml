@@ -7,16 +7,22 @@ before_install:
   - gem --version
 matrix:
   include:
-    # Rails dev / 6 builds >= 2.5.0
-    - rvm: 2.6.2
-      env: RAILS_VERSION=master
-    - rvm: 2.5.5
-      env: RAILS_VERSION=master
+    # Rails dev / 6 builds >= 2.4.10
+    - rvm: 2.7.1
+      env: RAILS_VERSION='~> 6.0.0'
+    - rvm: 2.6.6
+      env: RAILS_VERSION='~> 6.0.0'
+    - rvm: 2.5.8
+      env: RAILS_VERSION='~> 6.0.0'
 
     # Rails 5.2 builds >= 2.2.2
-    - rvm: 2.5.5
+    - rvm: 2.7.1
       env: RAILS_VERSION='~> 5.2.0'
-    - rvm: 2.4.6
+    - rvm: 2.6.6
+      env: RAILS_VERSION='~> 5.2.0'
+    - rvm: 2.5.8
+      env: RAILS_VERSION='~> 5.2.0'
+    - rvm: 2.4.10
       env: RAILS_VERSION='~> 5.2.0'
     - rvm: 2.3.8
       env: RAILS_VERSION='~> 5.2.0'
@@ -24,9 +30,13 @@ matrix:
       env: RAILS_VERSION='~> 5.2.0'
 
     # Rails 5.1 Builds >= 2.2.2
-    - rvm: 2.5.5
+    - rvm: 2.7.1
       env: RAILS_VERSION='~> 5.1.0'
-    - rvm: 2.4.6
+    - rvm: 2.6.6
+      env: RAILS_VERSION='~> 5.1.0'
+    - rvm: 2.5.8
+      env: RAILS_VERSION='~> 5.1.0'
+    - rvm: 2.4.10
       env: RAILS_VERSION='~> 5.1.0'
     - rvm: 2.3.8
       env: RAILS_VERSION='~> 5.1.0'
@@ -34,9 +44,13 @@ matrix:
       env: RAILS_VERSION='~> 5.1.0'
 
     # Rails 5.0 Builds >= 2.2.2
-    - rvm: 2.5.5
+    - rvm: 2.7.1
       env: RAILS_VERSION='~> 5.0.0'
-    - rvm: 2.4.6
+    - rvm: 2.6.6
+      env: RAILS_VERSION='~> 5.0.0'
+    - rvm: 2.5.8
+      env: RAILS_VERSION='~> 5.0.0'
+    - rvm: 2.4.10
       env: RAILS_VERSION='~> 5.0.0'
     - rvm: 2.3.8
       env: RAILS_VERSION='~> 5.0.0'
@@ -44,9 +58,9 @@ matrix:
       env: RAILS_VERSION='~> 5.0.0'
 
     # Rails 4.2 Builds >= 1.9.3
-    - rvm: 2.4.6
+    - rvm: 2.4.10
       env: RAILS_VERSION='~> 4.2.0'
-    - rvm: 2.4.6
+    - rvm: 2.4.10
       env: RAILS_VERSION=4-2-stable
     - rvm: 2.3.8
       env: RAILS_VERSION='~> 4.2.0'
