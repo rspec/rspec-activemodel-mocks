@@ -178,7 +178,7 @@ matrix:
       env: RAILS_VERSION='~> 3.0.20'
 
   allow_failures:
-    - env: RAILS_VERSION=master
+    - env: RAILS_VERSION='~> 6.0.0'
 
   fast_finish: true
 
