@@ -19,23 +19,25 @@ group :documentation do
   gem 'github-markup', '1.0.0'
 end
 
-case version = ENV.fetch('RAILS_VERSION', '4.2.4')
-when /\Amaster\z/, /stable\z/
+version = ENV.fetch('RAILS_VERSION', '6.0.0')
+version_float = version.tr('-', '.').tr('~> ', '').to_f
+
+if version_float < 4
+  gem 'sqlite3', '~> 1.3.5'
+elsif version_float < 6
+  gem 'sqlite3', '~> 1.3.6'
+else
+  gem 'sqlite3', '~> 1.4'
+end
+
+if version =~ /stable\z/
   gem "activerecord", :github => "rails/rails", :branch => version
   gem "activemodel", :github => "rails/rails", :branch => version
   gem "activesupport", :github => "rails/rails", :branch => version
-  if version.start_with?('4')
-    gem 'sqlite3', '~> 1.3.6'
-  elsif version.start_with?('3')
-    gem 'sqlite3', '~> 1.3.5'
-  else
-    gem 'sqlite3'
-  end
 else
   gem "activerecord", version
   gem "activemodel", version
   gem "activesupport", version
-  gem 'sqlite3', '~> 1.3.6'
 end
 
 if version < '4.0.0'
