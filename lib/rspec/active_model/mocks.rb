@@ -1,3 +1,5 @@
+warn "This branch is deprecated. Please use `main`."
+:Gwq
 require 'rspec/core'
 
 RSpec::configure do |c|
