@@ -14,12 +14,8 @@ And then execute:
 
     $ bundle
 
-If you are using [rspec-rails](https://github.com/rspec/rspec-rails) and have
-followed the installation instructions there, you're all set to use `stub_model`
-and `mock_model`.
-
-To use `stub_model` and `mock_model` without rspec-rails, require the
-following file:
+To finish the installation and start using `stub_model` and `mock_model`, require the
+following file in your `spec_helper.rb` or `rails_helper.rb`.
 
     require 'rspec/active_model/mocks'
 
