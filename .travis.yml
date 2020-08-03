@@ -184,5 +184,5 @@ matrix:
 
 branches:
   only:
-    - master
+    - main
     - /^\d+-\d+-maintenance$/
