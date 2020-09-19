@@ -81,6 +81,7 @@ describe "mock_model(RealModel)" do
       it "is empty" do
         model = mock_model(MockableModel)
         expect(model.errors).to be_empty
+        expect(model.errors).to be_blank
       end
     end
 
@@ -88,6 +89,7 @@ describe "mock_model(RealModel)" do
       it "is not empty" do
         model = mock_model(MockableModel, :save => false)
         expect(model.errors).not_to be_empty
+        expect(model.errors).not_to be_blank
       end
     end
 
@@ -95,6 +97,7 @@ describe "mock_model(RealModel)" do
       it "is not empty" do
         model = mock_model(MockableModel, :save => false)
         expect(model.errors).not_to be_empty
+        expect(model.errors).not_to be_blank
       end
     end
   end
