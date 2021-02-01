@@ -107,7 +107,39 @@ describe "mock_model(RealModel)" do
     end
   end
 
-  describe "as association" do
+  describe "has_many association" do
+    before(:each) do
+      @real = HasManyAssociatedModel.new
+      @mock_model = mock_model(MockableModel)
+      @real.mockable_models << @mock_model
+    end
+
+    it "passes: associated_model == mock" do
+      expect([@mock_model]).to eq(@real.mockable_models)
+    end
+
+    it "passes: mock == associated_model" do
+      expect(@real.mockable_models).to eq([@mock_model])
+    end
+  end
+
+  xdescribe "has_many association that doesn't exist yet" do
+    before(:each) do
+      @real = HasManyAssociatedModel.create!
+      @mock_model = mock_model("Other")
+      @real.nonexistent_models = [@mock_model]
+    end
+
+    it "passes: associated_model == mock" do
+      expect([@mock_models]).to eq(@real.nonexistent_model)
+    end
+
+    it "passes: mock == associated_model" do
+      expect(@real.nonexistent_model).to eq([@mock_models])
+    end
+  end
+
+  describe "belongs_to association" do
     before(:each) do
       @real = AssociatedModel.create!
       @mock_model = mock_model(MockableModel)
@@ -123,7 +155,7 @@ describe "mock_model(RealModel)" do
     end
   end
 
-  describe "as association that doesn't exist yet" do
+  describe "belongs_to association that doesn't exist yet" do
     before(:each) do
       @real = AssociatedModel.create!
       @mock_model = mock_model("Other")

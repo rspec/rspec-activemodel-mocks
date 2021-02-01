@@ -10,7 +10,8 @@ module Connections
         #{host.primary_key} integer PRIMARY KEY AUTOINCREMENT,
         associated_model_id integer,
         mockable_model_id integer,
-        nonexistent_model_id integer
+        nonexistent_model_id integer,
+        has_many_associated_model_id integer
       )
     eosql
   end
@@ -49,6 +50,12 @@ class MockableModelNoPrimaryKey < ActiveRecord::Base
 end
 
 class SubMockableModel < MockableModel
+end
+
+class HasManyAssociatedModel < ActiveRecord::Base
+  extend Connections
+  has_many :mockable_models
+  has_many :nonexistent_models, :class_name => "Other"
 end
 
 class AssociatedModel < ActiveRecord::Base
