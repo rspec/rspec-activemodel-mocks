@@ -7,7 +7,15 @@ before_install:
   - gem --version
 matrix:
   include:
-    # Rails dev / 6 builds >= 2.4.10
+    # Rails 6.1 builds >= 2.4.10
+    - rvm: 2.7.1
+      env: RAILS_VERSION='~> 6.1.0'
+    - rvm: 2.6.6
+      env: RAILS_VERSION='~> 6.1.0'
+    - rvm: 2.5.8
+      env: RAILS_VERSION='~> 6.1.0'
+
+    # Rails 6 builds >= 2.4.10
     - rvm: 2.7.1
       env: RAILS_VERSION='~> 6.0.0'
     - rvm: 2.6.6
@@ -176,9 +184,6 @@ matrix:
       env: RAILS_VERSION='~> 3.0.20'
     - rvm: 1.8.7
       env: RAILS_VERSION='~> 3.0.20'
-
-  allow_failures:
-    - env: RAILS_VERSION='~> 6.0.0'
 
   fast_finish: true
 
