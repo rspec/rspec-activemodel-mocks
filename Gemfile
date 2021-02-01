@@ -19,7 +19,7 @@ group :documentation do
   gem 'github-markup', '1.0.0'
 end
 
-version = ENV.fetch('RAILS_VERSION', '6.0.0')
+version = ENV.fetch('RAILS_VERSION', '6.1.1')
 version_float = version.tr('-', '.').tr('~> ', '').to_f
 
 if version_float < 4
