@@ -7,7 +7,7 @@ gemspec
   if File.exist?(library_path) && !ENV['USE_GIT_REPOS']
     gem lib, :path => library_path
   else
-    gem lib, :git => "git://github.com/rspec/#{lib}.git"
+    gem lib, :github => "rspec/#{lib}"
   end
 end
 
