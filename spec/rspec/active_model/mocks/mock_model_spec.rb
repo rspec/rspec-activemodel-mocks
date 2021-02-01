@@ -195,6 +195,13 @@ describe "mock_model(RealModel)" do
 
   describe "#has_attribute?" do
     context "with an ActiveRecord model" do
+      around do |example|
+        original = RSpec::Mocks.configuration.syntax
+        RSpec::Mocks.configuration.syntax = :should
+        example.run
+        RSpec::Mocks.configuration.syntax = original
+      end
+
       before(:each) do
         MockableModel.stub(:column_names).and_return(["column_a", "column_b"])
         @model = mock_model(MockableModel)
