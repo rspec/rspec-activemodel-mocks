@@ -159,6 +159,14 @@ EOM
           __model_class_has_column?(attr_name)
         end unless stubs.has_key?(:has_attribute?)
 
+        msingleton.__send__(:define_method, :_has_attribute?) do |attr_name|
+          __model_class_has_column?(attr_name)
+        end unless stubs.has_key?(:_has_attribute?)
+
+        msingleton.__send__(:define_method, :_write_attribute) do |_k, _v|
+          ;
+        end unless stubs.has_key?(:_write_attribute)
+
         msingleton.__send__(:define_method, :respond_to?) do |method_name, *args|
         include_private = args.first || false
           __model_class_has_column?(method_name) ? true : super(method_name, include_private)
@@ -243,11 +251,13 @@ EOM
     def stub_model(model_class, stubs={})
       model_class.new.tap do |m|
         m.extend ActiveModelStubExtensions
-        if defined?(ActiveRecord) && model_class < ActiveRecord::Base && model_class.primary_key
+        if defined?(ActiveRecord) && model_class < ActiveRecord::Base
           m.extend ActiveRecordStubExtensions
-          primary_key = model_class.primary_key.to_sym
-          stubs = {primary_key => next_id}.merge(stubs)
-          stubs = {:persisted? => !!stubs[primary_key]}.merge(stubs)
+          if model_class.primary_key
+            primary_key = model_class.primary_key.to_sym
+            stubs = {primary_key => next_id}.merge(stubs)
+            stubs = {:persisted? => !!stubs[primary_key]}.merge(stubs)
+          end
         else
           stubs = {:id => next_id}.merge(stubs)
           stubs = {:persisted? => !!stubs[:id]}.merge(stubs)

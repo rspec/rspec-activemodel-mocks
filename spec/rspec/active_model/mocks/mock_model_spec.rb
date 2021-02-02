@@ -107,7 +107,39 @@ describe "mock_model(RealModel)" do
     end
   end
 
-  describe "as association" do
+  describe "has_many association" do
+    before(:each) do
+      @real = HasManyAssociatedModel.new
+      @mock_model = mock_model(MockableModel)
+      @real.mockable_models << @mock_model
+    end
+
+    it "passes: associated_model == mock" do
+      expect([@mock_model]).to eq(@real.mockable_models)
+    end
+
+    it "passes: mock == associated_model" do
+      expect(@real.mockable_models).to eq([@mock_model])
+    end
+  end
+
+  describe "has_one association" do
+    before(:each) do
+      @real = HasOneAssociatedModel.new
+      @mock_model = mock_model(MockableModel)
+      @real.mockable_model = @mock_model
+    end
+
+    it "passes: associated_model == mock" do
+      expect(@mock_model).to eq(@real.mockable_model)
+    end
+
+    it "passes: mock == associated_model" do
+      expect(@real.mockable_model).to eq(@mock_model)
+    end
+  end
+
+  describe "belongs_to association" do
     before(:each) do
       @real = AssociatedModel.create!
       @mock_model = mock_model(MockableModel)
@@ -123,7 +155,7 @@ describe "mock_model(RealModel)" do
     end
   end
 
-  describe "as association that doesn't exist yet" do
+  describe "belongs_to association that doesn't exist yet" do
     before(:each) do
       @real = AssociatedModel.create!
       @mock_model = mock_model("Other")
@@ -195,6 +227,13 @@ describe "mock_model(RealModel)" do
 
   describe "#has_attribute?" do
     context "with an ActiveRecord model" do
+      around do |example|
+        original = RSpec::Mocks.configuration.syntax
+        RSpec::Mocks.configuration.syntax = :should
+        example.run
+        RSpec::Mocks.configuration.syntax = original
+      end
+
       before(:each) do
         MockableModel.stub(:column_names).and_return(["column_a", "column_b"])
         @model = mock_model(MockableModel)
