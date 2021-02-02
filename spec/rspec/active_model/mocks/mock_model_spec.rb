@@ -123,19 +123,19 @@ describe "mock_model(RealModel)" do
     end
   end
 
-  xdescribe "has_many association that doesn't exist yet" do
+  describe "has_one association" do
     before(:each) do
-      @real = HasManyAssociatedModel.create!
-      @mock_model = mock_model("Other")
-      @real.nonexistent_models = [@mock_model]
+      @real = HasOneAssociatedModel.new
+      @mock_model = mock_model(MockableModel)
+      @real.mockable_model = @mock_model
     end
 
     it "passes: associated_model == mock" do
-      expect([@mock_models]).to eq(@real.nonexistent_model)
+      expect(@mock_model).to eq(@real.mockable_model)
     end
 
     it "passes: mock == associated_model" do
-      expect(@real.nonexistent_model).to eq([@mock_models])
+      expect(@real.mockable_model).to eq(@mock_model)
     end
   end
 

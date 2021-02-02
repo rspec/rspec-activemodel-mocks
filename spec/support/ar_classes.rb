@@ -58,6 +58,12 @@ class HasManyAssociatedModel < ActiveRecord::Base
   has_many :nonexistent_models, :class_name => "Other"
 end
 
+class HasOneAssociatedModel < ActiveRecord::Base
+  extend Connections
+  has_one :mockable_model
+  has_one :nonexistent_model, :class_name => "Other"
+end
+
 class AssociatedModel < ActiveRecord::Base
   extend Connections
   belongs_to :mockable_model
