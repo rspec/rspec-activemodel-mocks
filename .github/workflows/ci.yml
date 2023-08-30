@@ -1,0 +1,53 @@
+name: RSpec CI
+on:
+  push:
+    branches:
+      - 'main'
+      - '*-maintenance'
+      - '*-dev'
+      - 'pr-*'
+  pull_request:
+    branches:
+      - '*'
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: 'Ruby: ${{ matrix.ruby }}, Rails: ${{ matrix.env.RAILS_VERSION }}'
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+       include:
+         # Rails 6.1 builds >= 2.5
+         - ruby: 3.1
+           env:
+             RAILS_VERSION: '~> 6.1.0'
+         - ruby: '3.0'
+           env:
+             RAILS_VERSION: '~> 6.1.0'
+         - ruby: 2.7
+           env:
+             RAILS_VERSION: '~> 6.1.0'
+         - ruby: 2.6
+           env:
+             RAILS_VERSION: '~> 6.1.0'
+         - ruby: 2.5
+           env:
+             RAILS_VERSION: '~> 6.1.0'
+
+    env: ${{ matrix.env }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - run: script/update_rubygems_and_install_bundler
+      - run: bundle install --binstubs
+      - run: bundle exec rspec
+        continue-on-error: ${{ matrix.allow_failure || false }}
+
