@@ -48,6 +48,6 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
       - run: script/update_rubygems_and_install_bundler
       - run: bundle install --binstubs
-      - run: bundle exec rspec
+      - run: script/run_build
         continue-on-error: ${{ matrix.allow_failure || false }}
 
