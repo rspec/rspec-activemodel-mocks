@@ -40,6 +40,17 @@ jobs:
            env:
              RAILS_VERSION: '~> 6.1.0'
 
+         # Rails 6.0 builds >= 2.4.10, < 3.0
+         - ruby: 2.7
+           env:
+             RAILS_VERSION: '~> 6.0.0'
+         - ruby: 2.6
+           env:
+             RAILS_VERSION: '~> 6.0.0'
+         - ruby: 2.5
+           env:
+             RAILS_VERSION: '~> 6.0.0'
+
     env: ${{ matrix.env }}
     steps:
       - uses: actions/checkout@v3
