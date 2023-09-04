@@ -7,7 +7,7 @@ gemspec
   if File.exist?(library_path) && !ENV['USE_GIT_REPOS']
     gem lib, :path => library_path
   else
-    gem lib, :git => "git://github.com/rspec/#{lib}.git"
+    gem lib, :git => "https://github.com/rspec/#{lib}.git"
   end
 end
 
@@ -51,12 +51,16 @@ else
   end
 end
 
-if RUBY_VERSION < '2.0.0' && !!(RbConfig::CONFIG['host_os'] =~ /cygwin|mswin|mingw|bccwin|wince|emx/)
-  gem 'ffi', '< 1.9.15' # allow ffi to be installed on older rubies on windows
-elsif RUBY_VERSION < '1.9'
+if RUBY_VERSION < '2.2.0' && !!(RbConfig::CONFIG['host_os'] =~ /cygwin|mswin|mingw|bccwin|wince|emx/)
+  gem 'ffi', '< 1.10'
+elsif RUBY_VERSION < '2.4.0' && !!(RbConfig::CONFIG['host_os'] =~ /cygwin|mswin|mingw|bccwin|wince|emx/)
+  gem 'ffi', '< 1.15'
+elsif RUBY_VERSION < '2.0'
   gem 'ffi', '< 1.9.19' # ffi dropped Ruby 1.8 support in 1.9.19
+elsif RUBY_VERSION < '2.3.0'
+  gem 'ffi', '~> 1.12.0'
 else
-  gem 'ffi', '~> 1.9.25'
+  gem 'ffi', '~> 1.15.0'
 end
 
 gem "i18n", '< 0.7.0' if RUBY_VERSION < '1.9.3'

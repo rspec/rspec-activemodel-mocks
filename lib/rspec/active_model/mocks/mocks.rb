@@ -256,7 +256,11 @@ EOM
 
         stubs.each do |message, return_value|
           if m.respond_to?("#{message}=")
-            m.__send__("#{message}=", return_value)
+            begin
+              m.__send__("#{message}=", return_value)
+            rescue ActiveModel::MissingAttributeError
+              RSpec::Mocks.allow_message(m, message).and_return(return_value)
+            end
           else
             RSpec::Mocks.allow_message(m, message).and_return(return_value)
           end
