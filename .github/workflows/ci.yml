@@ -51,6 +51,26 @@ jobs:
            env:
              RAILS_VERSION: '~> 6.0.0'
 
+         # Rails 5.2 builds >= 2.2.2, <= 2.7
+         - ruby: 2.7
+           env:
+             RAILS_VERSION: '~> 5.2.0'
+         - ruby: 2.6
+           env:
+             RAILS_VERSION: '~> 5.2.0'
+         - ruby: 2.5
+           env:
+             RAILS_VERSION: '~> 5.2.0'
+         - ruby: 2.4
+           env:
+             RAILS_VERSION: '~> 5.2.0'
+         - ruby: 2.3
+           env:
+             RAILS_VERSION: '~> 5.2.0'
+         - ruby: 2.2
+           env:
+             RAILS_VERSION: '~> 5.2.0'
+
     env: ${{ matrix.env }}
     steps:
       - uses: actions/checkout@v3
