@@ -1,4 +1,4 @@
-# RSpec::ActiveModel::Mocks [![Build Status](https://secure.travis-ci.org/rspec/rspec-activemodel-mocks.svg?branch=main)](http://travis-ci.org/rspec/rspec-activemodel-mocks)
+# RSpec::ActiveModel::Mocks [![RSpec CI](https://github.com/rspec/rspec-activemodel-mocks/actions/workflows/ci.yml/badge.svg)](https://github.com/rspec/rspec-activemodel-mocks/actions/workflows/ci.yml)
 
 RSpec::ActiveModel::Mocks provides tools for testing `ActiveModel` classes.
 
