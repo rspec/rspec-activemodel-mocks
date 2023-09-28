@@ -10,7 +10,7 @@ export JRUBY_OPTS='-X-C' # disable JIT since these processes are so short lived
 export JAVA_OPTS='-client -XX:+TieredCompilation -XX:TieredStopAtLevel=1'
 
 echo "Running rspec specs"
-bin/rspec spec --format progress --profile
+bundle exec rspec spec --format progress --profile
 
 echo "Running cucumber specs"
 # TODO: it would be nice to figure out how to run the cukes w/o the overhead of
