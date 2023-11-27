@@ -161,6 +161,21 @@ describe "stub_model" do
       end
       expect(model).to be(@block_arg)
     end
+  end
 
+  describe "#===" do
+    it "works with a case statement" do
+      case stub_model(MockableModel)
+      when MockableModel then true
+      else
+        raise
+      end
+
+      case :not_stub_model
+      when MockableModel then raise
+      else
+        true
+      end
+    end
   end
 end

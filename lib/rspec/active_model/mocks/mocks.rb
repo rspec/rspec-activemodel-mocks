@@ -124,6 +124,11 @@ EOM
                :blank? => false}.merge(stubs)
 
       double("#{model_class.name}_#{stubs[:id]}", stubs).tap do |m|
+        if model_class.method(:===).owner == Module && !stubs.has_key?(:===)
+          allow(model_class).to receive(:===).and_wrap_original do |original, other|
+            m === other || original.call(other)
+          end
+        end
         msingleton = class << m; self; end
         msingleton.class_eval do
           include ActiveModelInstanceMethods

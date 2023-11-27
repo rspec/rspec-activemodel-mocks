@@ -157,6 +157,50 @@ describe "mock_model(RealModel)" do
     end
   end
 
+  describe "#===" do
+    it "works with a case statement" do
+      case mock_model(MockableModel)
+      when MockableModel then true
+      else
+        raise
+      end
+
+      case :not_mockable_model
+      when MockableModel then raise
+      else
+        true
+      end
+    end
+
+    it "won't break previous stubs" do
+      allow(MockableModel).to receive(:===).with("string") { true }
+      mock_model(MockableModel)
+
+      case "string"
+      when MockableModel then true
+      else
+        raise
+      end
+    end
+
+    it "won't override class definitions" do
+      another_mockable_model =
+        Class.new(MockableModel) do
+          def self.===(other)
+            true
+          end
+        end
+
+      mock_model(another_mockable_model)
+
+      case "string"
+      when another_mockable_model then true
+      else
+        raise
+      end
+    end
+  end
+
   describe "#kind_of?" do
     before(:each) do
       @model = mock_model(SubMockableModel)
