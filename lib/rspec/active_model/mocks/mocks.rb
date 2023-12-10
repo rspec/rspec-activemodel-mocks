@@ -99,6 +99,13 @@ module RSpec::ActiveModel::Mocks
           model_class = Object.const_set(string_or_model_class, Class.new do
             extend ::ActiveModel::Naming
             def self.primary_key; :id; end
+
+            # For detection of being a valid association in 7+
+            def self.<(other); other == ActiveRecord::Base; end
+            def self._reflect_on_association(_other); nil; end
+            def self.composite_primary_key?; false; end
+            def self.has_query_constraints?; false; end
+            def self.param_delimiter; "-"; end
           end)
         end
       else

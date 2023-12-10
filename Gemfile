@@ -64,3 +64,7 @@ else
 end
 
 gem "i18n", '< 0.7.0' if RUBY_VERSION < '1.9.3'
+
+if RUBY_VERSION < '2.0.0'
+  gem 'cucumber', "< 3"
+end
