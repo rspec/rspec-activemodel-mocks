@@ -173,11 +173,13 @@ describe "stub_model" do
         raise
       end
 
+      # rubocop:disable Lint/LiteralAsCondition
       case :not_stub_model
       when MockableModel then raise
       else
         true
       end
+      # rubocop:enable Lint/LiteralAsCondition
     end
   end
 end
