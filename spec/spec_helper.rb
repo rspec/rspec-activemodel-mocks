@@ -2,7 +2,7 @@
 require 'rspec/active_model/mocks'
 require 'active_record'
 
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each {|f| require f}
 
 module RSpec
   module Core
