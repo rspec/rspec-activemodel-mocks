@@ -38,9 +38,9 @@ def copy(file_or_dir)
 end
 
 Before do
-  steps %Q{
+  steps %(
     Given a directory named "spec"
-  }
+  )
 
   Dir['tmp/sample/*'].each do |file_or_dir|
     if !(file_or_dir =~ /spec$/)

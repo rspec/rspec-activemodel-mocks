@@ -28,7 +28,7 @@ namespace :generate do
       Dir.mkdir('tmp') unless File.directory?('tmp')
       sh "cp -r ./templates/sample ./tmp/sample"
 
-      if test ?d, bindir
+      if test 'd', bindir
         Dir.chdir("./tmp/sample") do
           Dir.mkdir("bin") unless File.directory?("bin")
           sh "ln -sf #{bindir}/rake bin/rake"

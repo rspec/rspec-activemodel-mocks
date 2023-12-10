@@ -244,7 +244,7 @@ describe "mock_model(RealModel)" do
   describe "#has_attribute?" do
     context "with an ActiveRecord model" do
       before(:each) do
-        MockableModel.stub(:column_names).and_return(["column_a", "column_b"])
+        MockableModel.stub(:column_names).and_return(%w[column_a column_b])
         @model = mock_model(MockableModel)
       end
 
@@ -271,7 +271,7 @@ describe "mock_model(RealModel)" do
   describe "#respond_to?" do
     context "with an ActiveRecord model" do
       before(:each) do
-        allow(MockableModel).to receive(:column_names).and_return(["column_a", "column_b"])
+        allow(MockableModel).to receive(:column_names).and_return(%w[column_a column_b])
         @model = mock_model(MockableModel)
       end
 
