@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe "mock_model(RealModel)" do
@@ -104,9 +105,9 @@ describe "mock_model(RealModel)" do
 
   describe "with params" do
     it "does not mutate its parameters" do
-      params = {:a => 'b'}
+      params = { :a => 'b' }
       mock_model(MockableModel, params)
-      expect(params).to eq({:a => 'b'})
+      expect(params).to eq({ :a => 'b' })
     end
   end
 
@@ -168,39 +169,45 @@ describe "mock_model(RealModel)" do
         raise
       end
 
+      # rubocop:disable Lint/LiteralAsCondition
       case :not_mockable_model
       when MockableModel then raise
       else
         true
       end
+      # rubocop:enable Lint/LiteralAsCondition
     end
 
     it "won't break previous stubs" do
       allow(MockableModel).to receive(:===).with("string") { true }
       mock_model(MockableModel)
 
+      # rubocop:disable Lint/LiteralAsCondition
       case "string"
       when MockableModel then true
       else
         raise
       end
+      # rubocop:enable Lint/LiteralAsCondition
     end
 
     it "won't override class definitions" do
       another_mockable_model =
         Class.new(MockableModel) do
-          def self.===(other)
+          def self.===(_other)
             true
           end
         end
 
       mock_model(another_mockable_model)
 
+      # rubocop:disable Lint/LiteralAsCondition
       case "string"
       when another_mockable_model then true
       else
         raise
       end
+      # rubocop:enable Lint/LiteralAsCondition
     end
   end
 
@@ -243,7 +250,7 @@ describe "mock_model(RealModel)" do
   describe "#has_attribute?" do
     context "with an ActiveRecord model" do
       before(:each) do
-        MockableModel.stub(:column_names).and_return(["column_a", "column_b"])
+        MockableModel.stub(:column_names).and_return(%w[column_a column_b])
         @model = mock_model(MockableModel)
       end
 
@@ -270,7 +277,7 @@ describe "mock_model(RealModel)" do
   describe "#respond_to?" do
     context "with an ActiveRecord model" do
       before(:each) do
-        allow(MockableModel).to receive(:column_names).and_return(["column_a", "column_b"])
+        allow(MockableModel).to receive(:column_names).and_return(%w[column_a column_b])
         @model = mock_model(MockableModel)
       end
 
@@ -498,9 +505,9 @@ describe "mock_model(RealModel)" do
             ERR
           end
           include Test::Unit::Assertions
-          if defined?(Test::Unit::AutoRunner.need_auto_run = ())
+          if defined?((Test::Unit::AutoRunner.need_auto_run = ()))
             Test::Unit::AutoRunner.need_auto_run = false
-          elsif defined?(Test::Unit.run = ())
+          elsif defined?((Test::Unit.run = ()))
             Test::Unit.run = false
           end
         else
@@ -511,9 +518,9 @@ describe "mock_model(RealModel)" do
       else
         require 'test/unit/assertions'
         include Test::Unit::Assertions
-        if defined?(Test::Unit::AutoRunner.need_auto_run = ())
+        if defined?((Test::Unit::AutoRunner.need_auto_run = ()))
           Test::Unit::AutoRunner.need_auto_run = false
-        elsif defined?(Test::Unit.run = ())
+        elsif defined?((Test::Unit.run = ()))
           Test::Unit.run = false
         end
       end
@@ -523,8 +530,8 @@ describe "mock_model(RealModel)" do
     include ActiveModel::Lint::Tests
 
     # to_s is to support ruby-1.9
-    ActiveModel::Lint::Tests.public_instance_methods.map{|m| m.to_s}.grep(/^test/).each do |m|
-      example m.gsub('_',' ') do
+    ActiveModel::Lint::Tests.public_instance_methods.map {|m| m.to_s}.grep(/^test/).each do |m|
+      example m.gsub('_', ' ') do
         send m
       end
     end

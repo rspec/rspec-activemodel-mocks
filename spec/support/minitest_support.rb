@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Minitest requires you provide an assertions ivar for the context
 # it is running within. We need this so that ActiveModel::Lint tests
 # can successfully be run.

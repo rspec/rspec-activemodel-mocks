@@ -1,5 +1,5 @@
-# -*- encoding: utf-8 -*-
-$LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
+# frozen_string_literal: true
+$LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
 require 'rspec/active_model/mocks/version'
 
 Gem::Specification.new do |s|
@@ -14,10 +14,11 @@ Gem::Specification.new do |s|
   s.description = "RSpec test doubles for ActiveModel and ActiveRecord"
 
   s.metadata = {
-    'bug_tracker_uri'   => 'https://github.com/rspec/rspec-activemodel-mocks/issues',
+    'bug_tracker_uri' => 'https://github.com/rspec/rspec-activemodel-mocks/issues',
     'documentation_uri' => 'https://rspec.info/documentation/',
-    'mailing_list_uri'  => 'https://groups.google.com/forum/#!forum/rspec',
-    'source_code_uri'   => 'https://github.com/rspec/rspec-activemodel-mocks',
+    'mailing_list_uri' => 'https://groups.google.com/forum/#!forum/rspec',
+    'source_code_uri' => 'https://github.com/rspec/rspec-activemodel-mocks',
+    'rubygems_mfa_required' => 'true'
   }
 
   s.files             = `git ls-files -- lib/*`.split("\n")
@@ -32,9 +33,9 @@ Gem::Specification.new do |s|
     s.cert_chain = [File.expand_path('~/.gem/rspec-gem-public_cert.pem')]
   end
 
-  s.add_runtime_dependency(%q<activesupport>, [">= 3.0"])
-  s.add_runtime_dependency(%q<activemodel>,   [">= 3.0"])
-  s.add_runtime_dependency(%q<rspec-mocks>,   [">= 2.99", "< 4.0"])
+  s.add_runtime_dependency('activemodel',   [">= 3.0"])
+  s.add_runtime_dependency('activesupport', [">= 3.0"])
+  s.add_runtime_dependency('rspec-mocks',   [">= 2.99", "< 4.0"])
 
   if RUBY_VERSION.to_f < 1.9 || RUBY_VERSION == '1.9.2'
     s.add_development_dependency "rake",     "~> 10.0.0"
@@ -46,8 +47,8 @@ Gem::Specification.new do |s|
     s.add_development_dependency "rake",     "~> 13.0.0"
   end
 
-  s.add_development_dependency 'cucumber', '>= 1.3'
+  s.add_development_dependency('activerecord',  [">= 3.0"])
   s.add_development_dependency 'aruba',    '~> 0.4.11'
+  s.add_development_dependency 'cucumber', '>= 1.3'
   s.add_development_dependency 'ZenTest',  '~> 4.11.2'
-  s.add_development_dependency(%q<activerecord>,  [">= 3.0"])
 end

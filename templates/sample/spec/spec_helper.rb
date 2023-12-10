@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 $:<< File.join(File.dirname(__FILE__), '..')
 require 'active_record'
 require 'rspec/active_model/mocks'

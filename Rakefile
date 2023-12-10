@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "bundler"
 begin
   Bundler.setup
@@ -20,14 +21,14 @@ Cucumber::Rake::Task.new(:cucumber)
 
 namespace :generate do
   desc "generate a fresh app with rspec installed"
-  task :sample do |t|
+  task :sample do |_t|
     unless File.directory?('./tmp/sample')
       bindir = File.expand_path("bin")
 
       Dir.mkdir('tmp') unless File.directory?('tmp')
       sh "cp -r ./templates/sample ./tmp/sample"
 
-      if test ?d, bindir
+      if test 'd', bindir
         Dir.chdir("./tmp/sample") do
           Dir.mkdir("bin") unless File.directory?("bin")
           sh "ln -sf #{bindir}/rake bin/rake"
@@ -63,8 +64,9 @@ namespace :clobber do
 end
 
 desc "Push docs/cukes to relishapp using the relish-client-gem"
-task :relish, :version do |t, args|
+task :relish, :version do |_t, args|
   raise "rake relish[VERSION]" unless args[:version]
+
   sh "cp Changelog.md features/"
   if `relish versions rspec/rspec-activemodel-mocks`.split.map(&:strip).include? args[:version]
     puts "Version #{args[:version]} already exists"

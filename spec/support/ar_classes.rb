@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveRecord::Base.establish_connection(
   :adapter => 'sqlite3',
   :database => ':memory:'
@@ -5,31 +6,31 @@ ActiveRecord::Base.establish_connection(
 
 module Connections
   def self.extended(host)
-    host.connection.execute <<-eosql
+    host.connection.execute <<-EOSQL
       CREATE TABLE #{host.table_name} (
         #{host.primary_key} integer PRIMARY KEY AUTOINCREMENT,
         associated_model_id integer,
         mockable_model_id integer,
         nonexistent_model_id integer
       )
-    eosql
+    EOSQL
   end
 end
 
 module ConnectionsView
   def self.extended(host)
-    host.connection.execute <<-eosql
+    host.connection.execute <<-EOSQL
       CREATE TABLE some_table (
         associated_model_id integer,
         mockable_model_id integer,
         nonexistent_model_id integer
       )
-    eosql
+    EOSQL
 
-    host.connection.execute <<-eosql
+    host.connection.execute <<-EOSQL
       CREATE VIEW #{host.table_name} AS
         select * from some_table;
-    eosql
+    EOSQL
   end
 end
 

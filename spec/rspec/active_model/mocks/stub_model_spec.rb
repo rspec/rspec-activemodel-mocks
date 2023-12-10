@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe "stub_model" do
@@ -89,7 +90,8 @@ describe "stub_model" do
     it "raises when hitting the db" do
       expect do
         stub_model(MockableModel).connection
-      end.to raise_error(RSpec::ActiveModel::Mocks::IllegalDataAccessException, /stubbed models are not allowed to access the database/)
+      end.to raise_error(RSpec::ActiveModel::Mocks::IllegalDataAccessException,
+                         /stubbed models are not allowed to access the database/)
     end
 
     it "increments the id" do
@@ -171,11 +173,13 @@ describe "stub_model" do
         raise
       end
 
+      # rubocop:disable Lint/LiteralAsCondition
       case :not_stub_model
       when MockableModel then raise
       else
         true
       end
+      # rubocop:enable Lint/LiteralAsCondition
     end
   end
 end
