@@ -17,7 +17,8 @@ Gem::Specification.new do |s|
     'bug_tracker_uri' => 'https://github.com/rspec/rspec-activemodel-mocks/issues',
     'documentation_uri' => 'https://rspec.info/documentation/',
     'mailing_list_uri' => 'https://groups.google.com/forum/#!forum/rspec',
-    'source_code_uri' => 'https://github.com/rspec/rspec-activemodel-mocks'
+    'source_code_uri' => 'https://github.com/rspec/rspec-activemodel-mocks',
+    'rubygems_mfa_required' => 'true'
   }
 
   s.files             = `git ls-files -- lib/*`.split("\n")
