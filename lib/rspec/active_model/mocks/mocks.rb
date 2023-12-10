@@ -133,7 +133,7 @@ It received #{model_class.inspect}
                 :blank? => false }.merge(stubs)
 
       double("#{model_class.name}_#{stubs[:id]}", stubs).tap do |m|
-        if model_class.method(:===).owner == Module && !stubs.has_key?(:===)
+        if model_class.method(:===).owner == Module && !stubs.key?(:===)
           allow(model_class).to receive(:===).and_wrap_original do |original, other|
             m === other || original.call(other)
           end
@@ -152,15 +152,15 @@ It received #{model_class.inspect}
 
         msingleton.__send__(:define_method, :is_a?) do |other|
           model_class.ancestors.include?(other)
-        end unless stubs.has_key?(:is_a?)
+        end unless stubs.key?(:is_a?)
 
         msingleton.__send__(:define_method, :kind_of?) do |other|
           model_class.ancestors.include?(other)
-        end unless stubs.has_key?(:kind_of?)
+        end unless stubs.key?(:kind_of?)
 
         msingleton.__send__(:define_method, :instance_of?) do |other|
           other == model_class
-        end unless stubs.has_key?(:instance_of?)
+        end unless stubs.key?(:instance_of?)
 
         msingleton.__send__(:define_method, :__model_class_has_column?) do |method_name|
           model_class.respond_to?(:column_names) && model_class.column_names.include?(method_name.to_s)
@@ -168,12 +168,12 @@ It received #{model_class.inspect}
 
         msingleton.__send__(:define_method, :has_attribute?) do |attr_name|
           __model_class_has_column?(attr_name)
-        end unless stubs.has_key?(:has_attribute?)
+        end unless stubs.key?(:has_attribute?)
 
         msingleton.__send__(:define_method, :respond_to?) do |method_name, *args|
           include_private = args.first || false
           __model_class_has_column?(method_name) ? true : super(method_name, include_private)
-        end unless stubs.has_key?(:respond_to?)
+        end unless stubs.key?(:respond_to?)
 
         msingleton.__send__(:define_method, :method_missing) do |m, *a, &b|
           if respond_to?(m)
@@ -185,12 +185,12 @@ It received #{model_class.inspect}
 
         msingleton.__send__(:define_method, :class) do
           model_class
-        end unless stubs.has_key?(:class)
+        end unless stubs.key?(:class)
 
         mock_param = to_param
         msingleton.__send__(:define_method, :to_s) do
           "#{model_class.name}_#{mock_param}"
-        end unless stubs.has_key?(:to_s)
+        end unless stubs.key?(:to_s)
         yield m if block_given?
       end
     end
