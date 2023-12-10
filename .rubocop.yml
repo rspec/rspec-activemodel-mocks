@@ -10,18 +10,10 @@ AllCops:
     - tmp/**/*
     - bundle/**/*
 
-# TODO: Remove
-Gemspec/DevelopmentDependencies:
-  Enabled: false
-
 Gemspec/DeprecatedAttributeAssignment:
   Enabled: false
 
 Gemspec/RequiredRubyVersion:
-  Enabled: false
-
-# TODO: Remove
-Gemspec/RubyVersionGlobalsUsage:
   Enabled: false
 
 Layout/LineLength:
