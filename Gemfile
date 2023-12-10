@@ -12,7 +12,15 @@ gemspec
   end
 end
 
+# Development dependencies
+cucumber_version = RUBY_VERSION < '2.0.0' ? '< 3' : '>= 3'
+gem 'cucumber', cucumber_version
+
+gem 'rake'
 gem 'rubocop'
+
+gem 'aruba', '~> 0.4.11'
+gem 'ZenTest', '~> 4.11.2'
 
 ### deps for rdoc.info
 group :documentation do
@@ -66,7 +74,3 @@ else
 end
 
 gem "i18n", '< 0.7.0' if RUBY_VERSION < '1.9.3'
-
-if RUBY_VERSION < '2.0.0'
-  gem 'cucumber', "< 3"
-end
