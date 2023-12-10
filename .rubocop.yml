@@ -1,0 +1,56 @@
+inherit_from:
+  - .rubocop_rspec_base.yml
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.0
+  SuggestExtensions: false
+  Exclude:
+    - bin/**/*
+    - tmp/**/*
+    - bundle/**/*
+
+Gemspec/DeprecatedAttributeAssignment:
+  Enabled: false
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+
+# Over time we'd like to get this down, but this is what we're at now.
+Metrics/AbcSize:
+  Max: 28
+
+# Over time we'd like to get this down, but this is what we're at now.
+Metrics/BlockLength:
+  Max: 86
+  Exclude:
+    - spec/**/*
+
+Metrics/ModuleLength:
+  Max: 140
+
+# Over time we'd like to get this down, but this is what we're at now.
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Naming/FileName:
+  Exclude:
+    - lib/rspec-activemodel-mocks.rb
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - lib/rspec/active_model/mocks/mocks.rb
+
+# Still support older Rubies
+Style/ExpandPathArguments:
+  Enabled: false
+
+Style/NumericLiterals:
+  Exclude:
+    - templates/sample/db/*
+
+Style/OptionalBooleanParameter:
+  Enabled: false

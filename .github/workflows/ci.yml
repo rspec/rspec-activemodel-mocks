@@ -16,6 +16,18 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  rubocop:
+    name: Rubocop
+    runs-on: 'ubuntu-20.04'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+      - run: script/update_rubygems_and_install_bundler
+      - run: bundle install --standalone
+      - run: bundle exec rubocop -c .rubocop.yml
+
   test:
     name: 'Ruby: ${{ matrix.ruby }}, Rails: ${{ matrix.env.RAILS_VERSION }}'
     runs-on: ubuntu-20.04

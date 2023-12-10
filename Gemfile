@@ -12,12 +12,13 @@ gemspec
   end
 end
 
+gem 'rubocop'
 
 ### deps for rdoc.info
 group :documentation do
-  gem 'yard',          '~> 0.9', :require => false
-  gem 'redcarpet',     '2.3.0'
   gem 'github-markup', '1.0.0'
+  gem 'redcarpet',     '2.3.0'
+  gem 'yard',          '~> 0.9', :require => false
 end
 
 version = ENV.fetch('RAILS_VERSION', '6.0.0')
@@ -32,12 +33,12 @@ else
 end
 
 if version =~ /stable\z/
-  gem "activerecord", :github => "rails/rails", :branch => version
   gem "activemodel", :github => "rails/rails", :branch => version
+  gem "activerecord", :github => "rails/rails", :branch => version
   gem "activesupport", :github => "rails/rails", :branch => version
 else
-  gem "activerecord", version
   gem "activemodel", version
+  gem "activerecord", version
   gem "activesupport", version
 end
 
