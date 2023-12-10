@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec::Matchers::define :be_included_in_files_in do |path|
   match do |mod|
     stub_metadata(

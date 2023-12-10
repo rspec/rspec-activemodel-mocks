@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Helpers
   def stub_metadata(additional_metadata)
     stub_metadata = metadata_with(additional_metadata)
