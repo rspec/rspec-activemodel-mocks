@@ -97,6 +97,7 @@ module RSpec::ActiveModel::Mocks
           model_class = Object.const_get(string_or_model_class)
         else
           model_class = Object.const_set(string_or_model_class, Class.new do
+            # rubocop:disable  Style/SingleLineMethods
             extend ::ActiveModel::Naming
             def self.primary_key; :id; end
 
@@ -106,6 +107,7 @@ module RSpec::ActiveModel::Mocks
             def self.composite_primary_key?; false; end
             def self.has_query_constraints?; false; end
             def self.param_delimiter; "-"; end
+            # rubocop:enable  Style/SingleLineMethods
           end)
         end
       else
