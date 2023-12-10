@@ -212,7 +212,7 @@ It received #{model_class.inspect}
     module ActiveRecordStubExtensions
       # Stubs `id` (or other primary key method) to return nil
       def as_new_record
-        self.__send__("#{self.class.primary_key}=", nil)
+        __send__("#{self.class.primary_key}=", nil)
         super
       end
 
