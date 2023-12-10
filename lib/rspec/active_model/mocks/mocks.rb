@@ -74,6 +74,8 @@ module RSpec::ActiveModel::Mocks
       end
     end
 
+    # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
+
     # Creates a test double representing `string_or_model_class` with common
     # ActiveModel methods stubbed out. Additional methods may be easily
     # stubbed (via add_stubs) if `stubs` is passed. This is most useful for
@@ -194,6 +196,7 @@ It received #{model_class.inspect}
         yield m if block_given?
       end
     end
+    # rubocop:enable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
 
     module ActiveModelStubExtensions
       # Stubs `persisted` to return false and `id` to return nil
@@ -228,6 +231,8 @@ It received #{model_class.inspect}
               "stubbed models are not allowed to access the database"
       end
     end
+
+    # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
 
     # Creates an instance of `Model` with `to_param` stubbed using a
     # generated value that is unique to each object. If `Model` is an
@@ -285,14 +290,17 @@ It received #{model_class.inspect}
         yield m if block_given?
       end
     end
+    # rubocop:enable Metrics/AbcSize,Metrics/MethodLength
 
     private
 
+    # rubocop:disable Style/ClassVars
     @@model_id = 1000
 
     def next_id
       @@model_id += 1
     end
+    # rubocop:enable Style/ClassVars
   end
 end
 

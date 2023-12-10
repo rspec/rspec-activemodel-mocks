@@ -470,6 +470,7 @@ describe "mock_model(RealModel)" do
   end
 
   describe "ActiveModel Lint tests" do
+    # rubocop:disable Lint/EmptyExpression,Metrics/BlockNesting
     begin
       require 'minitest/assertions'
       include Minitest::Assertions
@@ -525,6 +526,7 @@ describe "mock_model(RealModel)" do
         end
       end
     end
+    # rubocop:enable Lint/EmptyExpression,Metrics/BlockNesting
 
     require 'active_model/lint'
     include ActiveModel::Lint::Tests
