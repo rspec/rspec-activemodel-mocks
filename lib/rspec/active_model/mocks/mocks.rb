@@ -6,7 +6,6 @@ require 'active_model'
 module RSpec::ActiveModel::Mocks
   class IllegalDataAccessException < StandardError; end
   module Mocks
-
     module ActiveModelInstanceMethods
       # Stubs `persisted?` to return false and `id` to return nil
       # @return self
@@ -92,7 +91,7 @@ module RSpec::ActiveModel::Mocks
     #   * A String representing a Class that does not exist
     #   * A String representing a Class that extends ActiveModel::Naming
     #   * A Class that extends ActiveModel::Naming
-    def mock_model(string_or_model_class, stubs = {})
+    def mock_model(string_or_model_class, stubs={})
       if String === string_or_model_class
         if Object.const_defined?(string_or_model_class)
           model_class = Object.const_get(string_or_model_class)
@@ -114,22 +113,22 @@ module RSpec::ActiveModel::Mocks
       end
 
       unless model_class.kind_of? ::ActiveModel::Naming
-        raise ArgumentError.new <<-EOM
+        raise ArgumentError, <<-EOM
 The mock_model method can only accept as its first argument:
 * A String representing a Class that does not exist
 * A String representing a Class that extends ActiveModel::Naming
 * A Class that extends ActiveModel::Naming
 
 It received #{model_class.inspect}
-EOM
+        EOM
       end
 
-      stubs = {:id => next_id}.merge(stubs)
-      stubs = {:persisted? => !!stubs[:id],
-               :destroyed? => false,
-               :marked_for_destruction? => false,
-               :valid? => true,
-               :blank? => false}.merge(stubs)
+      stubs = { :id => next_id }.merge(stubs)
+      stubs = { :persisted? => !!stubs[:id],
+                :destroyed? => false,
+                :marked_for_destruction? => false,
+                :valid? => true,
+                :blank? => false }.merge(stubs)
 
       double("#{model_class.name}_#{stubs[:id]}", stubs).tap do |m|
         if model_class.method(:===).owner == Module && !stubs.has_key?(:===)
@@ -144,11 +143,9 @@ EOM
           include ActiveModel::Conversion
           include ActiveModel::Validations
         end
-        if defined?(ActiveRecord)
-          if stubs.values_at(:save, :update_attributes, :update).include?(false)
-            RSpec::Mocks.allow_message(m.errors, :empty?).and_return(false)
-            RSpec::Mocks.allow_message(m.errors, :blank?).and_return(false)
-          end
+        if defined?(ActiveRecord) && stubs.values_at(:save, :update_attributes, :update).include?(false)
+          RSpec::Mocks.allow_message(m.errors, :empty?).and_return(false)
+          RSpec::Mocks.allow_message(m.errors, :blank?).and_return(false)
         end
 
         msingleton.__send__(:define_method, :is_a?) do |other|
@@ -172,12 +169,16 @@ EOM
         end unless stubs.has_key?(:has_attribute?)
 
         msingleton.__send__(:define_method, :respond_to?) do |method_name, *args|
-        include_private = args.first || false
+          include_private = args.first || false
           __model_class_has_column?(method_name) ? true : super(method_name, include_private)
         end unless stubs.has_key?(:respond_to?)
 
         msingleton.__send__(:define_method, :method_missing) do |m, *a, &b|
-          respond_to?(m) ? null_object? ? self : nil : super(m, *a, &b)
+          if respond_to?(m)
+            null_object? ? self : nil
+          else
+            super(m, *a, &b)
+          end
         end
 
         msingleton.__send__(:define_method, :class) do
@@ -221,7 +222,8 @@ EOM
       # Raises an IllegalDataAccessException (stubbed models are not allowed to access the database)
       # @raises IllegalDataAccessException
       def connection
-        raise RSpec::ActiveModel::Mocks::IllegalDataAccessException.new("stubbed models are not allowed to access the database")
+        raise RSpec::ActiveModel::Mocks::IllegalDataAccessException,
+              "stubbed models are not allowed to access the database"
       end
     end
 
@@ -258,13 +260,13 @@ EOM
         if defined?(ActiveRecord) && model_class < ActiveRecord::Base && model_class.primary_key
           m.extend ActiveRecordStubExtensions
           primary_key = model_class.primary_key.to_sym
-          stubs = {primary_key => next_id}.merge(stubs)
-          stubs = {:persisted? => !!stubs[primary_key]}.merge(stubs)
+          stubs = { primary_key => next_id }.merge(stubs)
+          stubs = { :persisted? => !!stubs[primary_key] }.merge(stubs)
         else
-          stubs = {:id => next_id}.merge(stubs)
-          stubs = {:persisted? => !!stubs[:id]}.merge(stubs)
+          stubs = { :id => next_id }.merge(stubs)
+          stubs = { :persisted? => !!stubs[:id] }.merge(stubs)
         end
-        stubs = {:blank? => false}.merge(stubs)
+        stubs = { :blank? => false }.merge(stubs)
 
         stubs.each do |message, return_value|
           if m.respond_to?("#{message}=")
@@ -282,14 +284,13 @@ EOM
       end
     end
 
-  private
+    private
 
     @@model_id = 1000
 
     def next_id
       @@model_id += 1
     end
-
   end
 end
 

@@ -105,9 +105,9 @@ describe "mock_model(RealModel)" do
 
   describe "with params" do
     it "does not mutate its parameters" do
-      params = {:a => 'b'}
+      params = { :a => 'b' }
       mock_model(MockableModel, params)
-      expect(params).to eq({:a => 'b'})
+      expect(params).to eq({ :a => 'b' })
     end
   end
 
@@ -499,9 +499,9 @@ describe "mock_model(RealModel)" do
             ERR
           end
           include Test::Unit::Assertions
-          if defined?(Test::Unit::AutoRunner.need_auto_run = ())
+          if defined?((Test::Unit::AutoRunner.need_auto_run = ()))
             Test::Unit::AutoRunner.need_auto_run = false
-          elsif defined?(Test::Unit.run = ())
+          elsif defined?((Test::Unit.run = ()))
             Test::Unit.run = false
           end
         else
@@ -512,9 +512,9 @@ describe "mock_model(RealModel)" do
       else
         require 'test/unit/assertions'
         include Test::Unit::Assertions
-        if defined?(Test::Unit::AutoRunner.need_auto_run = ())
+        if defined?((Test::Unit::AutoRunner.need_auto_run = ()))
           Test::Unit::AutoRunner.need_auto_run = false
-        elsif defined?(Test::Unit.run = ())
+        elsif defined?((Test::Unit.run = ()))
           Test::Unit.run = false
         end
       end
@@ -524,8 +524,8 @@ describe "mock_model(RealModel)" do
     include ActiveModel::Lint::Tests
 
     # to_s is to support ruby-1.9
-    ActiveModel::Lint::Tests.public_instance_methods.map{|m| m.to_s}.grep(/^test/).each do |m|
-      example m.gsub('_',' ') do
+    ActiveModel::Lint::Tests.public_instance_methods.map {|m| m.to_s}.grep(/^test/).each do |m|
+      example m.gsub('_', ' ') do
         send m
       end
     end

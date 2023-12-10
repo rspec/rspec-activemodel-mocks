@@ -18,7 +18,7 @@ unless File.directory?('./tmp/sample')
 end
 
 def aruba_path(file_or_dir)
-  File.expand_path("../../../#{file_or_dir.sub('sample','aruba')}", __FILE__)
+  File.expand_path("../../../#{file_or_dir.sub('sample', 'aruba')}", __FILE__)
 end
 
 def sample_path(file_or_dir)
@@ -43,7 +43,7 @@ Before do
   )
 
   Dir['tmp/sample/*'].each do |file_or_dir|
-    if !(file_or_dir =~ /spec$/)
+    if file_or_dir !~ /spec$/
       write_symlink(file_or_dir)
     end
   end

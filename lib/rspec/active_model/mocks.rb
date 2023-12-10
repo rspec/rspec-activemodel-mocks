@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rspec/core'
 
-RSpec::configure do |c|
+RSpec.configure do |c|
   c.backtrace_exclusion_patterns << /lib\/rspec\/active_model\/mocks/
 end
 

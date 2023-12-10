@@ -4,9 +4,13 @@ require 'active_record'
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
-class RSpec::Core::ExampleGroup
-  def self.run_all(reporter=nil)
-    run(reporter || RSpec::Mocks::Mock.new('reporter').as_null_object)
+module RSpec
+  module Core
+    class ExampleGroup
+      def self.run_all(reporter=nil)
+        run(reporter || RSpec::Mocks::Mock.new('reporter').as_null_object)
+      end
+    end
   end
 end
 
