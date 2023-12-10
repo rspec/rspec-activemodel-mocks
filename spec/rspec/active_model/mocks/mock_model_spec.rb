@@ -190,7 +190,7 @@ describe "mock_model(RealModel)" do
     it "won't override class definitions" do
       another_mockable_model =
         Class.new(MockableModel) do
-          def self.===(other)
+          def self.===(_other)
             true
           end
         end
