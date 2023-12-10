@@ -175,11 +175,11 @@ It received #{model_class.inspect}
           __model_class_has_column?(method_name) ? true : super(method_name, include_private)
         end unless stubs.key?(:respond_to?)
 
-        msingleton.__send__(:define_method, :method_missing) do |m, *a, &b|
-          if respond_to?(m)
+        msingleton.__send__(:define_method, :method_missing) do |missing_m, *a, &b|
+          if respond_to?(missing_m)
             null_object? ? self : nil
           else
-            super(m, *a, &b)
+            super(missing_m, *a, &b)
           end
         end
 
