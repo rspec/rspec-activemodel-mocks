@@ -209,6 +209,19 @@ describe "mock_model(RealModel)" do
       end
       # rubocop:enable Lint/LiteralAsCondition
     end
+
+    it "works for multiple mocks of the same model" do
+      foo = mock_model(MockableModel)
+      bar = mock_model(MockableModel)
+      baz = mock_model(MockableModelNoPrimaryKey)
+      quz = mock_model(MockableModel)
+
+      expect(MockableModel === foo).to be(true)
+      expect(MockableModel === bar).to be(true)
+      expect(MockableModel === baz).to be(false)
+      expect(MockableModelNoPrimaryKey === baz).to be(true)
+      expect(MockableModel === quz).to be(true)
+    end
   end
 
   describe "#kind_of?" do

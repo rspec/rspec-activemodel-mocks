@@ -135,11 +135,16 @@ It received #{model_class.inspect}
                 :blank? => false }.merge(stubs)
 
       double("#{model_class.name}_#{stubs[:id]}", stubs).tap do |m|
+        mock_store_klass = RSpec::ActiveModel::Mocks::Mocks
         if model_class.method(:===).owner == Module && !stubs.key?(:===)
+          allow(mock_store_klass).to receive(:mock_store) do
+            @mock_store ||= Hash.new { |h, k| h[k] = [] }
+          end
           allow(model_class).to receive(:===).and_wrap_original do |original, other|
-            m === other || original.call(other)
+            mock_store_klass.mock_store[model_class].include?(other) || original.call(other)
           end
         end
+        mock_store_klass.mock_store[model_class] << m if mock_store_klass.respond_to?(:mock_store)
         msingleton = class << m; self; end
         msingleton.class_eval do
           include ActiveModelInstanceMethods

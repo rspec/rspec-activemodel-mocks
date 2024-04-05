@@ -1,6 +1,10 @@
 ### Development
 [Full Changelog](https://github.com/rspec/rspec-activemodel-mocks/compare/v1.2.0...main)
 
+Bug fixes:
+
+* Fix `===` to work with multiple mocks. (@bquorning, #61)
+
 ### 1.2.0 / 2023-12-10
 [Full Changelog](https://github.com/rspec/rspec-activemodel-mocks/compare/v1.1.0...v1.2.0)
 
