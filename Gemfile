@@ -8,7 +8,12 @@ gemspec
   if File.exist?(library_path) && !ENV['USE_GIT_REPOS']
     gem lib, :path => library_path
   else
-    gem lib, :git => "https://github.com/rspec/#{lib}.git", :branch => ENV.fetch('RSPEC_BRANCH', 'main')
+    branch = ENV.fetch('RSPEC_BRANCH', 'main')
+    if lib == 'rspec'
+      gem 'rspec', :git => "https://github.com/rspec/rspec-metagem.git", :branch => branch
+    else
+      gem lib, :git => "https://github.com/rspec/#{lib}.git", :branch => branch
+    end
   end
 end
 
