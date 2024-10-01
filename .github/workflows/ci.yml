@@ -226,6 +226,7 @@ jobs:
               RAILS_VERSION: '~> 4.2.0'
 
     env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
       LEGACY_CI: true
       JRUBY_OPTS: ${{ matrix.container.jruby_opts || '--dev' }}
       RAILS_VERSION: ${{ matrix.env.RAILS_VERSION }}
