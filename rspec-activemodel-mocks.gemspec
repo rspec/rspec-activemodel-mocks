@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
     s.cert_chain = [File.expand_path('~/.gem/rspec-gem-public_cert.pem')]
   end
 
-  s.add_runtime_dependency('activemodel',   [">= 3.0"])
-  s.add_runtime_dependency('activesupport', [">= 3.0"])
-  s.add_runtime_dependency('rspec-mocks',   [">= 2.99", "< 4.0"])
+  s.add_dependency('activemodel',   [">= 3.0"])
+  s.add_dependency('activesupport', [">= 3.0"])
+  s.add_dependency('rspec-mocks',   [">= 2.99", "< 4.0"])
 end
