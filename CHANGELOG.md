@@ -1,5 +1,8 @@
 ### Development
-[Full Changelog](https://github.com/rspec/rspec-activemodel-mocks/compare/v1.2.0...main)
+[Full Changelog](https://github.com/rspec/rspec-activemodel-mocks/compare/v1.2.1...main)
+
+### 1.2.1 / 2024-10-02
+[Full Changelog](https://github.com/rspec/rspec-activemodel-mocks/compare/v1.2.0...v1.2.1)
 
 Bug fixes:
 
