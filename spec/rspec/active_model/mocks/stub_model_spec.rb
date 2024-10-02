@@ -181,5 +181,18 @@ describe "stub_model" do
       end
       # rubocop:enable Lint/LiteralAsCondition
     end
+
+    it "works for multiple mocks of the same model" do
+      foo = stub_model(MockableModel)
+      bar = stub_model(MockableModel)
+      baz = stub_model(MockableModelNoPrimaryKey)
+      qux = stub_model(MockableModel)
+
+      expect(MockableModel === foo).to be(true)
+      expect(MockableModel === bar).to be(true)
+      expect(MockableModel === baz).to be(false)
+      expect(MockableModelNoPrimaryKey === baz).to be(true)
+      expect(MockableModel === qux).to be(true)
+    end
   end
 end

@@ -94,6 +94,8 @@ module RSpec::ActiveModel::Mocks
     #   * A String representing a Class that extends ActiveModel::Naming
     #   * A Class that extends ActiveModel::Naming
     def mock_model(string_or_model_class, stubs={})
+      @__rspec_active_model_mocks ||= Hash.new { |h, k| h[k] = [] }
+
       if String === string_or_model_class
         if Object.const_defined?(string_or_model_class)
           model_class = Object.const_get(string_or_model_class)
@@ -137,9 +139,10 @@ It received #{model_class.inspect}
       double("#{model_class.name}_#{stubs[:id]}", stubs).tap do |m|
         if model_class.method(:===).owner == Module && !stubs.key?(:===)
           allow(model_class).to receive(:===).and_wrap_original do |original, other|
-            m === other || original.call(other)
+            @__rspec_active_model_mocks[model_class].include?(other) || original.call(other)
           end
         end
+        @__rspec_active_model_mocks[model_class] << m
         msingleton = class << m; self; end
         msingleton.class_eval do
           include ActiveModelInstanceMethods
