@@ -225,7 +225,6 @@ jobs:
           - container:
               version: "2.1.9"
               tag: ghcr.io/rspec/docker-ci:2.1.9
-              post: git config --global --add safe.directory `pwd`
             env:
               RAILS_VERSION: '~> 4.2.0'
           - container:
@@ -240,14 +239,16 @@ jobs:
               RAILS_VERSION: '~> 4.2.0'
 
     env:
-      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
       LEGACY_CI: true
       JRUBY_OPTS: ${{ matrix.container.jruby_opts || '--dev' }}
       RAILS_VERSION: ${{ matrix.env.RAILS_VERSION }}
     steps:
-      - uses: actions/checkout@v3
+      - run: git config --global --add safe.directory $GITHUB_WORKSPACE
+      - run: git init $GITHUB_WORKSPACE
+      - run: git remote add origin https://github.com/rspec/rspec-activemodel-mocks
+      - run: git config --local gc.auto 0
+      - run: git fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +$GITHUB_SHA:$GITHUB_REF
+      - run: git checkout --progress --force $GITHUB_REF
       - run: apt-get install libsqlite3-dev
-      - run: ${{ matrix.container.pre }}
       - run: script/legacy_setup.sh
-      - run: ${{ matrix.container.post }}
       - run: script/run_build
