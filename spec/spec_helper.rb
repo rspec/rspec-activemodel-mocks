@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'logger'
 require 'rspec/active_model/mocks'
 require 'active_record'
 
