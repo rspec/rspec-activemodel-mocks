@@ -37,6 +37,10 @@ end
 version = ENV.fetch('RAILS_VERSION', '6.0.0')
 version_float = version.tr('-', '.').tr('~> ', '').to_f
 
+if version_float < 7.1
+  gem 'concurrent-ruby', '<= 1.3.4'
+end
+
 if version_float < 4
   gem 'sqlite3', '~> 1.3.5'
 elsif version_float < 6
