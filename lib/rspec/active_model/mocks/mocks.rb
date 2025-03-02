@@ -176,8 +176,11 @@ It received #{model_class.inspect}
         end unless stubs.key?(:has_attribute?)
 
         msingleton.__send__(:define_method, :respond_to?) do |method_name, *args|
+          return true if __model_class_has_column?(method_name)
+
           include_private = args.first || false
-          __model_class_has_column?(method_name) ? true : super(method_name, include_private)
+
+          super(method_name, include_private)
         end unless stubs.key?(:respond_to?)
 
         msingleton.__send__(:define_method, :method_missing) do |missing_m, *a, &b|
