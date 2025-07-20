@@ -482,6 +482,44 @@ describe "mock_model(RealModel)" do
     end
   end
 
+  describe "attribute access methods" do
+    it "supports [] method with symbol" do
+      model = mock_model(MockableModel, :name => "John", :age => 25)
+      expect(model[:name]).to eq("John")
+      expect(model[:age]).to eq(25)
+    end
+
+    it "supports [] method with string" do
+      model = mock_model(MockableModel, :name => "John", :age => 25)
+      expect(model["name"]).to eq("John")
+      expect(model["age"]).to eq(25)
+    end
+
+    it "supports read_attribute method with symbol" do
+      model = mock_model(MockableModel, :name => "John", :age => 25)
+      expect(model.read_attribute(:name)).to eq("John")
+      expect(model.read_attribute(:age)).to eq(25)
+    end
+
+    it "supports read_attribute method with string" do
+      model = mock_model(MockableModel, :name => "John", :age => 25)
+      expect(model.read_attribute("name")).to eq("John")
+      expect(model.read_attribute("age")).to eq(25)
+    end
+
+    it "supports _read_attribute method with symbol" do
+      model = mock_model(MockableModel, :name => "John", :age => 25)
+      expect(model._read_attribute(:name)).to eq("John")
+      expect(model._read_attribute(:age)).to eq(25)
+    end
+
+    it "supports _read_attribute method with string" do
+      model = mock_model(MockableModel, :name => "John", :age => 25)
+      expect(model._read_attribute("name")).to eq("John")
+      expect(model._read_attribute("age")).to eq(25)
+    end
+  end
+
   describe "ActiveModel Lint tests" do
     # rubocop:disable Lint/EmptyExpression,Metrics/BlockNesting
     begin
