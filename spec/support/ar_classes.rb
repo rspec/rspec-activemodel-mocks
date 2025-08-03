@@ -41,6 +41,7 @@ end
 
 class MockableModel < ActiveRecord::Base
   extend Connections
+
   has_one :associated_model
 end
 
@@ -54,6 +55,7 @@ end
 
 class AssociatedModel < ActiveRecord::Base
   extend Connections
+
   belongs_to :mockable_model
   belongs_to :nonexistent_model, :class_name => "Other"
 end
@@ -61,5 +63,6 @@ end
 class AlternatePrimaryKeyModel < ActiveRecord::Base
   self.primary_key = :my_id
   extend Connections
+
   attr_accessor :my_id
 end

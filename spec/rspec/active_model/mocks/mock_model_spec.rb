@@ -557,6 +557,7 @@ describe "mock_model(RealModel)" do
             ERR
           end
           include Test::Unit::Assertions
+
           if defined?((Test::Unit::AutoRunner.need_auto_run = ()))
             Test::Unit::AutoRunner.need_auto_run = false
           elsif defined?((Test::Unit.run = ()))
@@ -570,6 +571,7 @@ describe "mock_model(RealModel)" do
       else
         require 'test/unit/assertions'
         include Test::Unit::Assertions
+
         if defined?((Test::Unit::AutoRunner.need_auto_run = ()))
           Test::Unit::AutoRunner.need_auto_run = false
         elsif defined?((Test::Unit.run = ()))
