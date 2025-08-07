@@ -103,6 +103,7 @@ module RSpec::ActiveModel::Mocks
           model_class = Object.const_set(string_or_model_class, Class.new do
             # rubocop:disable  Style/SingleLineMethods
             extend ::ActiveModel::Naming
+
             def self.primary_key; :id; end
 
             # For detection of being a valid association in 7+
