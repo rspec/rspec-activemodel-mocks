@@ -1,5 +1,12 @@
 ### Development
-[Full Changelog](https://github.com/rspec/rspec-activemodel-mocks/compare/v1.2.1...main)
+[Full Changelog](https://github.com/rspec/rspec-activemodel-mocks/compare/v1.3.0...main)
+
+### 1.3.0 / 2025-08-07
+[Full Changelog](https://github.com/rspec/rspec-activemodel-mocks/compare/v1.2.1...v1.3.0)
+
+Enhancements:
+
+* Support `read_attribute`. (Nour E-Din El-Nhass, rspec/rspec-activemodel-mocks#66)
 
 ### 1.2.1 / 2024-10-02
 [Full Changelog](https://github.com/rspec/rspec-activemodel-mocks/compare/v1.2.0...v1.2.1)
