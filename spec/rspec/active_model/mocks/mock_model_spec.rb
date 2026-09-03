@@ -169,26 +169,24 @@ describe "mock_model(RealModel)" do
         raise
       end
 
-      # rubocop:disable Lint/LiteralAsCondition
+      # rubocop:disable-next Lint/LiteralAsCondition
       case :not_mockable_model
       when MockableModel then raise
       else
         true
       end
-      # rubocop:enable Lint/LiteralAsCondition
     end
 
     it "won't break previous stubs" do
       allow(MockableModel).to receive(:===).with("string") { true }
       mock_model(MockableModel)
 
-      # rubocop:disable Lint/LiteralAsCondition
+      # rubocop:disable-next Lint/LiteralAsCondition
       case "string"
       when MockableModel then true
       else
         raise
       end
-      # rubocop:enable Lint/LiteralAsCondition
     end
 
     it "won't override class definitions" do
@@ -201,13 +199,12 @@ describe "mock_model(RealModel)" do
 
       mock_model(another_mockable_model)
 
-      # rubocop:disable Lint/LiteralAsCondition
+      # rubocop:disable-next Lint/LiteralAsCondition
       case "string"
       when another_mockable_model then true
       else
         raise
       end
-      # rubocop:enable Lint/LiteralAsCondition
     end
 
     it "works for multiple mocks of the same model" do
@@ -521,7 +518,7 @@ describe "mock_model(RealModel)" do
   end
 
   describe "ActiveModel Lint tests" do
-    # rubocop:disable Lint/EmptyExpression,Metrics/BlockNesting
+    # rubocop:disable-next Lint/EmptyExpression,Metrics/BlockNesting
     begin
       require 'minitest/assertions'
       include Minitest::Assertions
@@ -579,7 +576,6 @@ describe "mock_model(RealModel)" do
         end
       end
     end
-    # rubocop:enable Lint/EmptyExpression,Metrics/BlockNesting
 
     require 'active_model/lint'
     include ActiveModel::Lint::Tests
