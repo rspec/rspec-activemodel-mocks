@@ -167,6 +167,7 @@ describe "stub_model" do
 
   describe "#===" do
     it "works with a case statement" do
+      # rubocop:disable-next Lint/Void
       case stub_model(MockableModel)
       when MockableModel then true
       else
