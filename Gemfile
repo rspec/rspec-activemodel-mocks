@@ -21,7 +21,8 @@ end
 cucumber_version = RUBY_VERSION < '2.0.0' ? '< 3' : '>= 3'
 gem 'cucumber', cucumber_version
 
-gem 'rake'
+gem 'rake', RUBY_VERSION.to_f >= 2.3 ? '>= 13' : '< 13'
+
 gem 'rubocop'
 
 gem 'aruba', '~> 0.4.11'
