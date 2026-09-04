@@ -3,17 +3,17 @@ source "https://rubygems.org"
 
 gemspec
 
-%w[rspec rspec-core rspec-expectations rspec-mocks rspec-support].each do |lib|
-  library_path = File.expand_path("../../#{lib}", __FILE__)
+%w[rspec rspec-support rspec-core rspec-expectations rspec-mocks].each do |lib|
+  library_path = File.expand_path("../rspec/#{lib}", __FILE__)
+
   if File.exist?(library_path) && !ENV['USE_GIT_REPOS']
     gem lib, :path => library_path
+  elsif RUBY_VERSION.to_f > 2.2
+    branch = ENV.fetch('RSPEC_BRANCH', '3-13-maintenance')
+    gem lib, :git => "https://github.com/rspec/rspec", :glob => "#{lib}/#{lib}.gemspec", :branch => branch
   else
-    branch = ENV.fetch('RSPEC_BRANCH', 'main')
-    if lib == 'rspec'
-      gem 'rspec', :git => "https://github.com/rspec/rspec-metagem.git", :branch => branch
-    else
-      gem lib, :git => "https://github.com/rspec/#{lib}.git", :branch => branch
-    end
+    # Older ruby doesn't seem to support monorepos?
+    gem lib, :git => "https://github.com/rspec/#{lib == 'rspec' ? 'rspec-metagem' : lib}"
   end
 end
 
