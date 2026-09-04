@@ -167,19 +167,19 @@ describe "stub_model" do
 
   describe "#===" do
     it "works with a case statement" do
+      # rubocop:disable-next Lint/Void
       case stub_model(MockableModel)
       when MockableModel then true
       else
         raise
       end
 
-      # rubocop:disable Lint/LiteralAsCondition
+      # rubocop:disable-next Lint/LiteralAsCondition
       case :not_stub_model
       when MockableModel then raise
       else
         true
       end
-      # rubocop:enable Lint/LiteralAsCondition
     end
 
     it "works for multiple mocks of the same model" do
